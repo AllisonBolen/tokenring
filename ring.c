@@ -11,7 +11,7 @@ void parse(char* strInput, char** parsedInput);
 
 int main(int argc, char* argv[])
 {
-		int status, pid;
+		int status, pid, child;
 		// make fork
 
     for(int count = 0; count <= 2; count++){
@@ -19,15 +19,15 @@ int main(int argc, char* argv[])
         perror("fork failure");
         exit(1);
       }
-      else if (pid == 0) {
+      else if (pid == 0) { // child
           printf("I am child PID %ld\n", (long) getpid());
           /* insert an appropriate form of the exit() function here */
           exit(0);
       }
-      else {
+      else { // parent
           /* insert an appropriate form of the wait() system call here */
-          wait(&status);
-          printf("Child PID %ld terminated ", (long) getpid());
+          child = wait(&status);
+          printf("Child PID %ld terminated ", (long) child);
       }
     }
     // test commit stuff
