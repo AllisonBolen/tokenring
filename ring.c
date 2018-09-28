@@ -1,4 +1,3 @@
-[bolena@eos24 project2]$ cat shell.c
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -21,7 +20,7 @@ int main(int argc, char* argv[])
 			exit(1);
 		}
 		else if (!pid){ // child
-      printf("child");
+      printf("child\n");
       execvp(parsedInput[0], parsedInput);
 			exit(0);
 		}
