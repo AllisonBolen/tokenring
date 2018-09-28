@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 		}
 		else if (!pid){ // child
       printf("child\n");
-      execvp(parsedInput[0], parsedInput);
+      execvp("t", parsedInput);
 			exit(0);
 		}
 		else { // parent
