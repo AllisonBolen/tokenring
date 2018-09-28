@@ -8,27 +8,34 @@
 #include <sys/resource.h>
 
 void parse(char* strInput, char** parsedInput);
-## test?
+
 int main(int argc, char* argv[])
 {
 		int status, pid;
 		// make fork
-    int count = 0;
-
-		pid = fork();
-		if(pid < 0){
-			// fork failed
-			perror("Fork failed\n");
-			exit(1);
-		}
-		else if (!pid){ // child
-      printf("child\n");
-			exit(0);
-		}
-		else { // parent
-			waitpid(pid, &status, 0);
-      printf("parent\n");
-		}
+    int count;
+    for(int count = 0; count <= 2;){
+      if(pid = fork()){
+        wait(&status);
+      }else{
+        printf("parent");
+      }
+    }
+    // test commit stuff
+		// pid = fork();
+		// if(pid < 0){
+		// 	// fork failed
+		// 	perror("Fork failed\n");
+		// 	exit(1);
+		// }
+		// else if (!pid){ // child
+    //   printf("child\n");
+		// 	exit(0);
+		// }
+		// else { // parent
+		// 	waitpid(pid, &status, 0);
+    //   printf("parent\n");
+		// }
 	return(0);
 }
 
