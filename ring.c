@@ -13,8 +13,8 @@ int main(int argc, char* argv[])
 {
 		int status, pid;
 		// make fork
-    
-    for(int count = 0; count <= 2;){
+
+    for(int count = 0; count <= 2; count++){
       if ((pid = fork()) < 0) {
         perror("fork failure");
         exit(1);
