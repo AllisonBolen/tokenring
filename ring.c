@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 {
 		int status, pid;
 		// make fork
-    int count;
+    
     for(int count = 0; count <= 2;){
       if ((pid = fork()) < 0) {
         perror("fork failure");
