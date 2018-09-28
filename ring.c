@@ -6,7 +6,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <sys/resource.h>
-#this
+
 void parse(char* strInput, char** parsedInput);
 
 int main(int argc, char* argv[])
@@ -21,7 +21,6 @@ int main(int argc, char* argv[])
 		}
 		else if (!pid){ // child
       printf("child\n");
-      execvp("t", parsedInput);
 			exit(0);
 		}
 		else { // parent
