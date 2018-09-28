@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
       else {
           /* insert an appropriate form of the wait() system call here */
           wait(&status);
-          printf("Child PID %ld terminated with return status %d\n", (long) child, status);
+          printf("Child PID %ld terminated ", (long) getpid());
       }
     }
     // test commit stuff
