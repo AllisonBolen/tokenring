@@ -20,13 +20,12 @@ int main(int argc, char* argv[])
 			exit(1);
 		}
 		else if (!pid){ // child
-      printf("child\n");
-      execvp("t", parsedInput);
-			exit(0);
+		         printf("child\n");
+			 exit(0);
 		}
 		else { // parent
 			waitpid(pid, &status, 0);
-      printf("parent\n");
+        		printf("parent\n");
 		}
 	return(0);
 }
