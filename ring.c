@@ -8,11 +8,13 @@
 #include <sys/resource.h>
 
 void parse(char* strInput, char** parsedInput);
-
+## test?
 int main(int argc, char* argv[])
 {
 		int status, pid;
 		// make fork
+    int count = 0;
+
 		pid = fork();
 		if(pid < 0){
 			// fork failed
@@ -20,12 +22,12 @@ int main(int argc, char* argv[])
 			exit(1);
 		}
 		else if (!pid){ // child
-		         printf("child\n");
-			 exit(0);
+      printf("child\n");
+			exit(0);
 		}
 		else { // parent
 			waitpid(pid, &status, 0);
-        		printf("parent\n");
+      printf("parent\n");
 		}
 	return(0);
 }
