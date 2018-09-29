@@ -16,6 +16,7 @@ int main(int argc, char* argv[])
 		int status, pid, child;
     char* output = "STRING OUTPUT";
     int fd[2], nbytes;
+    cahr buffer[80];
 		// make fork
 
     for(int count = 0; count <= 2; count++){
@@ -35,8 +36,8 @@ int main(int argc, char* argv[])
           child = wait(&status);
           //printf("Child PID %ld terminated\n", (long) child);
           close(fd[1]);
-          nbytes = read(fd[0], readbuffer, sizeof(readbuffer));
-          printf("Received string: %s", readbuffer);
+          nbytes = read(fd[0], buffer, sizeof(buffer));
+          printf("Received string: %s", buffer);
       }
     }
     // test commit stuff
