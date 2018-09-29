@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
           //printf("Child PID %ld terminated\n", (long) child);
           close(fd[1]);
           read(fd[0], buffer, sizeof(buffer));
-          printf("Received string: %s", buffer);
+          printf("Received string: %s\n", buffer);
       }
     }
     // test commit stuff
