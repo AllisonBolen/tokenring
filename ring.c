@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
           close(fd[1]);
           //read(fd[0], buffer, sizeof(buffer));
           //printf("Received string: %s at %d\n", buffer, child);
-          printf("Pipe between parent %d and child %d\n", getpid, child);
+          printf("Pipe between parent %d and child %d\n", getpid(), child);
       }
       sleep(5);
     }
