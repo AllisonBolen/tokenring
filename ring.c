@@ -40,8 +40,9 @@ int main(int argc, char* argv[])
           read(fd[0], buffer, sizeof(buffer));
           printf("Received string: %s at %d\n", buffer, child);
       }
+      sleep(5);
     }
-    sleep(20);
+
     // test commit stuff
 		// pid = fork();
 		// if(pid < 0){
