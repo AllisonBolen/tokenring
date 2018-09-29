@@ -31,10 +31,10 @@ int main(int argc, char* argv[])
           // set up pipes between the children and install a signal killer
           close(fd[0]);
           write(fd[1], output, (strlen(output)+1));
-          child = getpid();
+
       }
       else { // parent
-          wait(&status);
+          child = wait(&status);
           //printf("Child PID %ld terminated\n", (long) child);
           close(fd[1]);
           read(fd[0], buffer, sizeof(buffer));
