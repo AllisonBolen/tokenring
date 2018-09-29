@@ -6,28 +6,37 @@
 #include <string.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#include <unistd.h>
+#include <sys/types.h>
 
 void parse(char* strInput, char** parsedInput);
 
 int main(int argc, char* argv[])
 {
 		int status, pid, child;
+    char* output = "STRING OUTPUT";
+    int fd[2], nbytes;
 		// make fork
 
     for(int count = 0; count <= 2; count++){
+      pipe(fd);
       if ((pid = fork()) < 0) {
         perror("fork failure");
         exit(1);
       }
       else if (pid == 0) { // child
           printf("I am child PID %ld\n", (long) getpid());
-          /* insert an appropriate form of the exit() function here */
-          exit(0);
+          // exit(0);
+          // set up pipes between the children and install a signal killer
+          close(fd[0]);
+          write(fd[1], output, (strlen(output)+1));
       }
       else { // parent
-          /* insert an appropriate form of the wait() system call here */
           child = wait(&status);
-          printf("Child PID %ld terminated\n", (long) child);
+          //printf("Child PID %ld terminated\n", (long) child);
+          close(fd[1]);
+          nbytes = read(fd[0], readbuffer, sizeof(readbuffer));
+          printf("Received string: %s", readbuffer);
       }
     }
     // test commit stuff
