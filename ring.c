@@ -13,9 +13,9 @@ void parse(char* strInput, char** parsedInput);
 
 int main(int argc, char* argv[])
 {
-		int status, pid, child;
+		int status, pid;
     char* output = "STRING OUTPUT";
-    int fd[2], nbytes;
+    int fd[2];
     char buffer[80];
 		// make fork
 
@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
           child = wait(&status);
           //printf("Child PID %ld terminated\n", (long) child);
           close(fd[1]);
-          nbytes = read(fd[0], buffer, sizeof(buffer));
+          read(fd[0], buffer, sizeof(buffer));
           printf("Received string: %s", buffer);
       }
     }
