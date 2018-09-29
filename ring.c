@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
     char buffer[80];
 		// make fork
 
-    for(int count = 0; count < 2; count++){
+    for(int count = 0; count < 3; count++){
       pipe(fd);
       if ((pid = fork()) < 0) {
         perror("fork failure");
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
       else if (pid == 0) { // child
           printf("I am child PID %ld\n", (long) getpid());
           // exit(0);
-          // set up pipes between the children and install a signal killer
+          // set up pipes between the children
           close(fd[0]);
           write(fd[1], output, (strlen(output)+1));
 
