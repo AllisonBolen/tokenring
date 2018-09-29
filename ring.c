@@ -41,6 +41,7 @@ int main(int argc, char* argv[])
           printf("Received string: %s at %d\n", buffer, child);
       }
     }
+    sleep(20);
     // test commit stuff
 		// pid = fork();
 		// if(pid < 0){
