@@ -13,7 +13,7 @@ void parse(char* strInput, char** parsedInput);
 
 int main(int argc, char* argv[])
 {
-		int status, pid;
+		int status, pid, child;
     char* output = "STRING OUTPUT";
     int fd[2];
     char buffer[80];
@@ -31,13 +31,14 @@ int main(int argc, char* argv[])
           // set up pipes between the children and install a signal killer
           close(fd[0]);
           write(fd[1], output, (strlen(output)+1));
+          child = getpid();
       }
       else { // parent
           wait(&status);
           //printf("Child PID %ld terminated\n", (long) child);
           close(fd[1]);
           read(fd[0], buffer, sizeof(buffer));
-          printf("Received string: %s\n", buffer);
+          printf("Received string: %s at %s\n", buffer, child);
       }
     }
     // test commit stuff
