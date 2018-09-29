@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
     char buffer[80];
 		// make fork
 
-    for(int count = 0; count < 1; count++){
+    for(int count = 0; count < 2; count++){
       pipe(fd);
       if ((pid = fork()) < 0) {
         perror("fork failure");
