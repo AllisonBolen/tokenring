@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 		int status, pid, child;
     char* output = "STRING OUTPUT";
     int fd[2], nbytes;
-    cahr buffer[80];
+    char buffer[80];
 		// make fork
 
     for(int count = 0; count <= 2; count++){
