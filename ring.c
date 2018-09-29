@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
           write(fd[1], output, (strlen(output)+1));
       }
       else { // parent
-          child = wait(&status);
+          wait(&status);
           //printf("Child PID %ld terminated\n", (long) child);
           close(fd[1]);
           read(fd[0], buffer, sizeof(buffer));
