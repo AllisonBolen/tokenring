@@ -19,11 +19,11 @@ int main(int argc, char* argv[])
         perror("fork failure");
         exit(1);
       }
-      // else if (pid == 0) { // child
-      //     printf("I am child PID %ld\n", (long) getpid());
-      //     /* insert an appropriate form of the exit() function here */
-      //     exit(0);
-      // }
+      else if (pid == 0) { // child
+          printf("I am child PID %ld\n", (long) getpid());
+          /* insert an appropriate form of the exit() function here */
+          exit(0);
+      }
       else { // parent
           /* insert an appropriate form of the wait() system call here */
           child = wait(&status);
