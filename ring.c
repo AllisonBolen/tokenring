@@ -36,10 +36,10 @@ int main(int argc, char* argv[])
     printf("What would you like the destination of the message to be: \n");
     fgets(destTemp, sizeof(destTemp), stdin);
     // convert and set
-    tok.dest = atoi(destTemp);
+    tok.dst = atoi(destTemp);
     numChild = atoi(numChildTemp);
 
-    for(int count = 0; count < 3; count++){
+    for(int count = 0; count < numChild; count++){
       pipe(fd);
       if ((pid = fork()) < 0) {
         perror("fork failure");
