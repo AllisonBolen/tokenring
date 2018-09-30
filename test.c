@@ -23,7 +23,6 @@ int main(int argc, char* argv[])
 
     printf("Parent pid: %d\n\n", getpid());
 
-    for(int i = 0; i < 5; i++) {
       pid = fork();
       if(pid < 0) {
           printf("Error");
@@ -55,7 +54,7 @@ int main(int argc, char* argv[])
       } else  {
           wait(NULL);
       }
-    }
+          
 	return(0);
 }
 
