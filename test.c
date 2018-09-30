@@ -45,10 +45,11 @@ int main(int argc, char* argv[])
         {
             printf("[son] pid %d from [parent] pid %d\n",getpid(),getppid());
             exit(0);
+            wait(NULL);
         }
     }
-    for(int i=0;i<5;i++) // loop will run n times (n=5)
-    wait(NULL);
+    // for(int i=0;i<5;i++) // loop will run n times (n=5)
+    // wait(NULL);
 	return(0);
 }
 
