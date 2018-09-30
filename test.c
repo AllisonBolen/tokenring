@@ -43,6 +43,7 @@ int main(int argc, char* argv[])
     {
         if(fork() == 0)
         {
+            fork();
             printf("[son] pid %d from [parent] pid %d\n",getpid(),getppid());
             wait(NULL);
             exit(0);
