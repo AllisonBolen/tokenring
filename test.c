@@ -25,9 +25,6 @@ int main(int argc, char* argv[])
     char INP[56] = "COOL";
     printf("Parent pid: %d\n\n", getpid());
       pipe(fd);
-      close(fd[0]);
-      printf("writing to pipe??\n");
-      write(fd[1], INP, (strlen(INP)+1));
       pid = fork();
       if(pid < 0) {
           printf("Error");
