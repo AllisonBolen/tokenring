@@ -29,11 +29,9 @@ int main(int argc, char* argv[])
       }
       else if (pid == 0) { // child
         for(int i = 0 ; i < 2; i ++){
-          if((cpid = fork())){
-            printf("This is the child %d of parent %d\n", getpid(), getppid());
-            printf("\n\n");
-            fork();
-          }
+          printf("This is the child %d of parent %d\n", getpid(), getppid());
+          printf("\n\n");
+          fork();  
         }
       }
       else { // parent
