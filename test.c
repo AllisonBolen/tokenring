@@ -32,6 +32,7 @@ int main(int argc, char* argv[])
           printf("This is the child %d of parent %d\n", getpid(), getppid());
           printf("\n\n");
           fork();
+          wait(&status);
         }
       }
       else { // parent
