@@ -19,7 +19,7 @@ struct token{
 
 int main(int argc, char* argv[])
 {
-		int status, pid, child;
+		int status, pid, cpid;
     int fd[2];
     char buffer[80];
     char numChildTemp[256];
@@ -35,9 +35,14 @@ int main(int argc, char* argv[])
         for(int i = 0 ; i < 2; i ++){
           //printf("I am child PID %ld of parent %d \n", (long) getpid(), getppid());
           //printf("Child is about to fork\n");
-          int childpid = fork();
-          printf("This is the child %d of parent %d\n", getpid(), getppid());
-          printf("\n new loop \n");
+          if((cpid = fork) < 0){
+            perror("fork failed");
+            exit(1);
+          }else if(cpid == 0){
+            wait(&status);
+            printf("This is the child %d of parent %d\n", getpid(), getppid());
+          }
+          printf("\n---\n");
         }
       }
       else { // parent
