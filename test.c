@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
               printf("Error");
               exit(1);
           } else if (bpid == 0) { // child
-              printf("Child (%d): %d Parent: %d\n", 2 getpid(), getppid());
+              printf("Child (%d): %d Parent: %d\n", 2, getpid(), getppid());
               cpid = fork();
               if(cpid < 0) {
                   printf("Error");
