@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     struct token tok;
     int count =1;
     strcpy(tok.input, string);
-    tok.dst = 2;
+    tok.dst = 3;
     printf("Parent pid: %d\n\n", getpid());
 
     pipe(fd);
@@ -76,7 +76,6 @@ int main(int argc, char* argv[])
                 printf("Child (%d): %d Parent: %d\n", 3, getpid(), getppid());
                 close(fd[1]);
                 if(tok.dst == count){
-                  printf("Reading from pipe??\n");
                   read(fd[0], buffer, sizeof(buffer));
                   printf("Received string: %s at %d\n", buffer, getpid());
                   tok.dst = 0;
