@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     int numChild = 0;
     char destTemp[256];
     printf("Parent pid: %d\n\n", getpid());
-    for(int count = 0; count < 1; count++){
+    for(int count = 0; count < 2; count++){
       if ((pid = fork()) < 0) {
         perror("fork failure");
         exit(1);
