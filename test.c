@@ -31,14 +31,10 @@ int main(int argc, char* argv[])
         for(int i = 0 ; i < 3; i ++){
           fork();
           printf("This is the child %d of parent %d\n", getpid(), getppid());
-          printf("\n\n");
           wait(&status);
+          printf("\n\n");
 
         }
-      }
-      else { // parent
-          child = wait(&status);
-          printf("Parent/r of all process is me: %d. we jsut heard from %d\n", getpid(), child);
       }
 	return(0);
 }
