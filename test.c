@@ -45,6 +45,7 @@ int main(int argc, char* argv[])
         {
             printf("[son] pid %d from [parent] pid %d\n",getpid(),getppid());
             wait(NULL);
+            exit(0);
         }
     }
     // for(int i=0;i<5;i++) // loop will run n times (n=5)
