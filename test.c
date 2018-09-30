@@ -33,16 +33,16 @@ int main(int argc, char* argv[])
       }
       else if (pid == 0) { // child
         for(int i = 0 ; i < 2; i ++){
-          printf("I am child PID %ld of parent %d \n", (long) getpid(), getppid());
+          //printf("I am child PID %ld of parent %d \n", (long) getpid(), getppid());
           //printf("Child is about to fork\n");
           int childpid = fork();
-          //printf("This is the child %d of parent %d\n", getpid(), getppid());
+          printf("This is the child %d of parent %d\n", getpid(), getppid());
           printf("\n new loop \n");
         }
       }
       else { // parent
           child = wait(&status);
-          printf("parent of all process is me: %d\n", getpid());
+          printf("Parent of all process is me: %d. we jsut heard from %d\n", getpid(), child);
       }
 	return(0);
 }
