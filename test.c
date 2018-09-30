@@ -19,7 +19,7 @@ struct token{
 
 int main(int argc, char* argv[])
 {
-		int status, pid, cpid;
+		int status, pid, cpid, child;
     int fd[2];
     char buffer[80];
     char numChildTemp[256];
