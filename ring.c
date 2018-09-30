@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
           //printf("Received string: %s at %d\n", buffer, child);
           printf("Pipe between parent %d and child %d\n", getpid(), child);
           char i[3] = "-l";
-          execvp("ps",i);
+          execvp("ps -l");
       }
       sleep(5);
     }
