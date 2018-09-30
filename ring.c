@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 		int status, pid, child;
     //char* output = "STRING OUTPUT";
     int fd[2];
-    //char buffer[80];
+    char buffer[80];
     char numChildTemp[256];
     int numChild = 0;
     char destTemp[256];
