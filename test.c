@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
           printf("Child is about to fork\n");
           int childpid = fork();
           printf("This is the child %d of parent %d\n", getpid(), getppid());
-          printf("\n\n new loop \n\n");
+          printf("\n new loop \n");
         }
       }
       else { // parent
