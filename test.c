@@ -23,13 +23,13 @@ int main(int argc, char* argv[])
 
     printf("Parent pid: %d\n\n", getpid());
 
-    for(i = 0; i < atoi(argv[1]); i++) {
+    for(i = 0; i < 5; i++) {
       pid = fork();
       if(pid < 0) {
           printf("Error");
           exit(1);
       } else if (pid == 0) {
-          printf("Child (%d): %d\n", i + 1, getpid());
+          printf("Child (%d): %d Parent: %d\n", i + 1, getpid(), getppid());
           exit(0);
       } else  {
           wait(NULL);

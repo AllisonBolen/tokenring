@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
       else if (pid == 0) { // child
           printf("I am child PID %ld\n", (long) getpid());
           // set up pipes between the children
+          //childpid = fork();
           close(fd[1]);
           printf("Reading from pipe??\n");
           read(fd[0], buffer, sizeof(buffer));
