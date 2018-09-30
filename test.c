@@ -23,19 +23,18 @@ int main(int argc, char* argv[])
 
     printf("Parent pid: %d\n\n", getpid());
 
-      if ((pid = fork()) < 0) {
-        perror("fork failure");
-        exit(1);
+    for(i = 0; i < atoi(argv[1]); i++) {
+      pid = fork();
+      if(pid < 0) {
+          printf("Error");
+          exit(1);
+      } else if (pid == 0) {
+          printf("Child (%d): %d\n", i + 1, getpid());
+          exit(0);
+      } else  {
+          wait(NULL);
       }
-      else if (pid == 0) { // child
-        for(int i = 0 ; i < 3; i ++){
-          fork();
-          printf("This is the child %d of parent %d\n", getpid(), getppid());
-          wait(&status);
-          printf("\n\n");
-
-        }
-      }
+    }
 	return(0);
 }
 
