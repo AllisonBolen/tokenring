@@ -41,13 +41,11 @@ int main(int argc, char* argv[])
       // }
       for(int i=0;i<5;i++) // loop will run n times (n=5)
     {
-        if(fork() == 0)
-        {
-            fork();
-            printf("[son] pid %d from [parent] pid %d\n",getpid(),getppid());
-            wait(NULL);
-            exit(0);
-        }
+      if(fork() == 0)
+      {
+        printf("This is the child %d of parent %d\n", getpid(), getppid());
+        wait(&status);
+      }
     }
     // for(int i=0;i<5;i++) // loop will run n times (n=5)
     // wait(NULL);
