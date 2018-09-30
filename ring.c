@@ -60,7 +60,6 @@ int main(int argc, char* argv[])
           //read(fd[0], buffer, sizeof(buffer));
           //printf("Received string: %s at %d\n", buffer, child);
           printf("Pipe between parent %d and child %d\n", getpid(), child);
-          break;
       }
       sleep(5);
     }
