@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     tok.dst = atoi(destTemp);
     numChild = atoi(numChildTemp);
 
-    for(int count = 0; count < numChild; count++){
+    //for(int count = 0; count < numChild; count++){
       pipe(fd);
       if ((pid = fork()) < 0) {
         perror("fork failure");
@@ -63,22 +63,7 @@ int main(int argc, char* argv[])
           write(fd[1], tok.input, (strlen(tok.input)+1));
       }
       sleep(5);
-    }
-    // test commit stuff
-		// pid = fork();
-		// if(pid < 0){
-		// 	// fork failed
-		// 	perror("Fork failed\n");
-		// 	exit(1);
-		// }
-		// else if (!pid){ // child
-    //   printf("child\n");
-		// 	exit(0);
-		// }
-		// else { // parent
-		// 	waitpid(pid, &status, 0);
-    //   printf("parent\n");
-		// }
+    //}
 	return(0);
 }
 
