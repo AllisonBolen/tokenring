@@ -15,7 +15,7 @@ void parse(char* strInput, char** parsedInput);
 struct token{
   char input[256];
   int dst;
-}
+};
 
 int main(int argc, char* argv[])
 {
