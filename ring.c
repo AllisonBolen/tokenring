@@ -50,15 +50,15 @@ int main(int argc, char* argv[])
           // exit(0);
           // set up pipes between the children
           close(fd[0]);
-          //write(fd[1], output, (strlen(output)+1));
+          write(fd[1], tok.input, (strlen(tok.input)+1));
 
       }
       else { // parent
           child = wait(&status);
           //printf("Child PID %ld terminated\n", (long) child);
           close(fd[1]);
-          //read(fd[0], buffer, sizeof(buffer));
-          //printf("Received string: %s at %d\n", buffer, child);
+          read(fd[0], buffer, sizeof(buffer));
+          printf("Received string: %s at %d\n", buffer, child);
           printf("Pipe between parent %d and child %d\n", getpid(), child);
       }
       sleep(5);
