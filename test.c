@@ -26,23 +26,23 @@ int main(int argc, char* argv[])
     int numChild = 0;
     char destTemp[256];
     printf("Parent pid: %d\n\n", getpid());
-    for(int count = 0; count < 2; count++){
+
       if ((pid = fork()) < 0) {
         perror("fork failure");
         exit(1);
       }
       else if (pid == 0) { // child
-          printf("I am child PID %ld\n", (long) getpid());
-
+        for(int i = 0 ; i < 2; i ++){
+          printf("I am child PID %ld of parent %d \n", (long) getpid(), getppid());
           printf("Child is about to fork\n");
           int childpid = fork();
           printf("This is the child %d of parent %d\n", getpid(), getppid());
+        }
       }
       else { // parent
           child = wait(&status);
+          printf("parent of all process is me: %d\n", getpid());
       }
-      sleep(5);
-    }
 	return(0);
 }
 
