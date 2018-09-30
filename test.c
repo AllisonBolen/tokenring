@@ -23,18 +23,36 @@ int main(int argc, char* argv[])
 
     printf("Parent pid: %d\n\n", getpid());
 
-    for(int i = 0; i < 5; i++) {
+    // for(int i = 0; i < 5; i++) {
       pid = fork();
       if(pid < 0) {
           printf("Error");
           exit(1);
-      } else if (pid == 0) {
-          printf("Child (%d): %d Parent: %d\n", i + 1, getpid(), getppid());
+      } else if (pid == 0) { // child
+          printf("Child (%d): %d Parent: %d\n", 1, getpid(), getppid());
+          if(pid < 0) {
+              printf("Error");
+              exit(1);
+          } else if (pid == 0) { // child
+              printf("Child (%d): %d Parent: %d\n", 2, getpid(), getppid());
+              if(pid < 0) {
+                  printf("Error");
+                  exit(1);
+              } else if (pid == 0) { // child
+                  printf("Child (%d): %d Parent: %d\n", 3, getpid(), getppid());
+                  exit(0);
+              } else  {
+                  wait(NULL);
+              }
+              exit(0);
+          } else  {
+              wait(NULL);
+          }
           exit(0);
       } else  {
           wait(NULL);
       }
-    }
+    // }
 	return(0);
 }
 
