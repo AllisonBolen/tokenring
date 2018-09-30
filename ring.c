@@ -41,13 +41,16 @@ int main(int argc, char* argv[])
 
     //for(int count = 0; count < numChild; count++){
       pipe(fd);
+      close(fd[0])
+      printf("writing to pipe??\n");
+      write(fd[1], tok.input, (strlen(tok.input)+1));
+
       if ((pid = fork()) < 0) {
         perror("fork failure");
         exit(1);
       }
       else if (pid == 0) { // child
           printf("I am child PID %ld\n", (long) getpid());
-          // exit(0);
           // set up pipes between the children
           close(fd[1]);
           printf("Reading from pipe??\n");
@@ -57,10 +60,10 @@ int main(int argc, char* argv[])
       else { // parent
           child = wait(&status);
           // set up pipe to read from parent?
-          close(fd[0]);
+          //close(fd[0]);
           printf("Pipe between parent %d and child %d\n", getpid(), child);
-          printf("writing to pipe??\n");
-          write(fd[1], tok.input, (strlen(tok.input)+1));
+          // printf("writing to pipe??\n");
+          // write(fd[1], tok.input, (strlen(tok.input)+1));
       }
       sleep(5);
     //}
