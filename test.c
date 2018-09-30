@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
         exit(1);
       }
       else if (pid == 0) { // child
-        for(int i = 0 ; i < 6; i ++){
+        for(int i = 0 ; i < 3; i ++){
           printf("This is the child %d of parent %d\n", getpid(), getppid());
           printf("\n\n");
           fork();
