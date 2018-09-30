@@ -48,7 +48,9 @@ int main(int argc, char* argv[])
       } else  {
         wait(NULL);
       }
-	return(0);
+
+}
+return(0);
 }
 
 void parse(char * strInput, char** parsedInput)
