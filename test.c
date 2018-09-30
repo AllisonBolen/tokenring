@@ -23,7 +23,12 @@ int main(int argc, char* argv[])
     int fd[2];
     char buffer[80];
     char* string = "STRING OUTPUT";
+    struct token tok;
+    int count =1;
+    tok.input = string;
+    tok.dst = 2;
     printf("Parent pid: %d\n\n", getpid());
+
     pipe(fd);
     pid = fork();
     if(pid < 0) {
@@ -34,10 +39,15 @@ int main(int argc, char* argv[])
 
 
         close(fd[1]);
-        printf("Reading from pipe??\n");
-        read(fd[0], buffer, sizeof(buffer));
-        printf("Received string: %s at %d\n", buffer, getpid());
-        
+        if(tok.dst == count){
+          printf("Reading from pipe??\n");
+          read(fd[0], buffer, sizeof(buffer));
+          printf("Received string: %s at %d\n", buffer, getpid());
+          tok.dst = 0;
+          tok.input = "";
+        }
+        count = count + 1;
+
         pipe(fd);
         bpid = fork();
         if(bpid < 0) {
@@ -48,9 +58,14 @@ int main(int argc, char* argv[])
 
 
             close(fd[1]);
-            printf("Reading from pipe??\n");
-            read(fd[0], buffer, sizeof(buffer));
-            printf("Received string: %s at %d\n", buffer, getpid());
+            if(tok.dst == count){
+              printf("Reading from pipe??\n");
+              read(fd[0], buffer, sizeof(buffer));
+              printf("Received string: %s at %d\n", buffer, getpid());
+              tok.dst = 0;
+              tok.input = "";
+            }
+            count = count + 1;
 
             pipe(fd);
             cpid = fork();
@@ -60,9 +75,15 @@ int main(int argc, char* argv[])
             } else if (cpid == 0) { // child
                 printf("Child (%d): %d Parent: %d\n", 3, getpid(), getppid());
                 close(fd[1]);
-                printf("Reading from pipe??\n");
-                read(fd[0], buffer, sizeof(buffer));
-                printf("Received string: %s at %d\n", buffer, getpid());
+                if(tok.dst == count){
+                  printf("Reading from pipe??\n");
+                  read(fd[0], buffer, sizeof(buffer));
+                  printf("Received string: %s at %d\n", buffer, getpid());
+                  tok.dst = 0;
+                  tok.input = "";
+                }
+                count = count + 1;
+                count = 1;
                 exit(0);
             } else  {
               close(fd[0]);
