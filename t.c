@@ -21,11 +21,6 @@ int main(void)
 
         if(childpid == 0)
         {
-                /* Child process closes up input side of pipe */
-                close(fd[0]);
-
-                /* Send "string" through the output side of pipe */
-                write(fd[1], string, (strlen(string)+1));
                 close(fd[1]);
 
                 /* Read in a string from the pipe */
