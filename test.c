@@ -40,10 +40,11 @@ int main(int argc, char* argv[])
       //     printf("Parent/r of all process is me: %d. we jsut heard from %d\n", getpid(), child);
       // }
       for(int i=0;i<5;i++) // loop will run n times (n=5)
-    {
+      {
       if(fork() == 0)
       {
         printf("This is the child %d of parent %d\n", getpid(), getppid());
+        sleep(2);
         wait(&status);
       }
     }
