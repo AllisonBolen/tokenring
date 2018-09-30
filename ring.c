@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 
     //for(int count = 0; count < numChild; count++){
       pipe(fd);
-      close(fd[0])
+      close(fd[0]);
       printf("writing to pipe??\n");
       write(fd[1], tok.input, (strlen(tok.input)+1));
 
