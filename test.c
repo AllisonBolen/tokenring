@@ -42,20 +42,12 @@ int main(int argc, char* argv[])
                   exit(1);
               } else if (cpid == 0) { // child
                   printf("Child (%d): %d Parent: %d\n", 3, getpid(), getppid());
-
                   exit(0);
-              } else  {
-                  wait(NULL);
               }
-              exit(0);
-          } else  {
-              wait(NULL);
           }
-          exit(0);
       } else  {
-          wait(NULL);
+        wait(NULL);
       }
-    }
 	return(0);
 }
 
