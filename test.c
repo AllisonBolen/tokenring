@@ -22,9 +22,12 @@ int main(int argc, char* argv[])
 		int status, pid, bpid, cpid;
     int fd[2];
     char buffer[80];
-    
+    char INP = "COOL"
     printf("Parent pid: %d\n\n", getpid());
       pipe(fd);
+      close(fd[0]);
+      printf("writing to pipe??\n");
+      write(fd[1], INP, (strlen(INP)+1));
       pid = fork();
       if(pid < 0) {
           printf("Error");
@@ -36,7 +39,7 @@ int main(int argc, char* argv[])
           close(fd[1]);
           printf("Reading from pipe??\n");
           read(fd[0], buffer, sizeof(buffer));
-          printf("Received string: %s at %d\n", buffer, child);
+          printf("Received string: %s at %d\n", buffer, getpid());
 
           bpid = fork();
           if(bpid < 0) {
@@ -49,7 +52,7 @@ int main(int argc, char* argv[])
               close(fd[1]);
               printf("Reading from pipe??\n");
               read(fd[0], buffer, sizeof(buffer));
-              printf("Received string: %s at %d\n", buffer, child);
+              printf("Received string: %s at %d\n", buffer, getpid());
               cpid = fork();
               if(cpid < 0) {
                   printf("Error");
@@ -59,31 +62,28 @@ int main(int argc, char* argv[])
                   close(fd[1]);
                   printf("Reading from pipe??\n");
                   read(fd[0], buffer, sizeof(buffer));
-                  printf("Received string: %s at %d\n", buffer, child);
+                  printf("Received string: %s at %d\n", buffer, getpid());
                   exit(0);
               } else  {
                 close(fd[0]);
-                printf("Pipe between parent %d and child %d\n", getpid(), child);
                 printf("writing to pipe??\n");
-                write(fd[1], tok.input, (strlen(tok.input)+1));
+                write(fd[1], INP, (strlen(INP)+1));
                 wait(NULL);
               }
 
               exit(0);
           } else  {
             close(fd[0]);
-            printf("Pipe between parent %d and child %d\n", getpid(), child);
             printf("writing to pipe??\n");
-            write(fd[1], tok.input, (strlen(tok.input)+1));
+            write(fd[1], INP, (strlen(INP)+1));
             wait(NULL);
           }
 
           exit(0);
       } else  {
         close(fd[0]);
-        printf("Pipe between parent %d and child %d\n", getpid(), child);
         printf("writing to pipe??\n");
-        write(fd[1], tok.input, (strlen(tok.input)+1));
+        write(fd[1], INP, (strlen(INP)+1));
         wait(NULL);
       }
 	return(0);
