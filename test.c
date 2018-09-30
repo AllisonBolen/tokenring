@@ -22,9 +22,9 @@ int main(int argc, char* argv[])
 		int status, pid, bpid, cpid;
     int fd[2];
     char buffer[80];
-    char* output = "STRING OUTPUT";
+    char* string = "STRING OUTPUT";
     printf("Parent pid: %d\n\n", getpid());
-
+    pipe(fd);
     pid = fork();
     if(pid < 0) {
         printf("Error");
@@ -32,12 +32,13 @@ int main(int argc, char* argv[])
     } else if (pid == 0) { // child
         printf("Child (%d): %d Parent: %d\n", 1, getpid(), getppid());
 
-        pipe(fd);
+
         close(fd[1]);
         printf("Reading from pipe??\n");
         read(fd[0], buffer, sizeof(buffer));
         printf("Received string: %s at %d\n", buffer, getpid());
-
+        
+        pipe(fd);
         bpid = fork();
         if(bpid < 0) {
             printf("Error");
@@ -45,11 +46,13 @@ int main(int argc, char* argv[])
         } else if (bpid == 0) { // child
             printf("Child (%d): %d Parent: %d\n", 2, getpid(), getppid());
 
-            pipe(fd);
+
             close(fd[1]);
             printf("Reading from pipe??\n");
             read(fd[0], buffer, sizeof(buffer));
             printf("Received string: %s at %d\n", buffer, getpid());
+
+            pipe(fd);
             cpid = fork();
             if(cpid < 0) {
                 printf("Error");
@@ -63,24 +66,27 @@ int main(int argc, char* argv[])
                 exit(0);
             } else  {
               close(fd[0]);
-              printf("writing to pipe??\n");
-              write(fd[1], output, (strlen(output)+1));
+
+              /* Send "string" through the output side of pipe */
+              write(fd[1], string, (strlen(string)+1));
               wait(NULL);
             }
 
             exit(0);
         } else  {
           close(fd[0]);
-          printf("writing to pipe??\n");
-          write(fd[1], output, (strlen(output)+1));
+
+          /* Send "string" through the output side of pipe */
+          write(fd[1], string, (strlen(string)+1));
           wait(NULL);
         }
 
         exit(0);
     } else  {
       close(fd[0]);
-      printf("writing to pipe??\n");
-      write(fd[1], output, (strlen(output)+1));
+
+      /* Send "string" through the output side of pipe */
+      write(fd[1], string, (strlen(string)+1));
       wait(NULL);
     }
 	return(0);
