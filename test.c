@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
           read(fd[0], buffer, sizeof(buffer));
           printf("Received string: %s at %d\n", buffer, getpid());
           tok.dst = 0;
-          tok.input = "";
+          strcpy(tok.input, string);
         }
         count = count + 1;
 
