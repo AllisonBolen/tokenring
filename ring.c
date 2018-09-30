@@ -11,14 +11,34 @@
 
 void parse(char* strInput, char** parsedInput);
 
+// token for passing
+struct token{
+  char input[256];
+  int dst;
+}
+
 int main(int argc, char* argv[])
 {
 		int status, pid, child;
     //char* output = "STRING OUTPUT";
     int fd[2];
     //char buffer[80];
+    char numChildTemp[256];
+    int numChild = 0;
+    char destTemp[256];
 		// make fork
-
+    // user userInput
+    struct token tok;
+    printf("How many machines would you like: \n");
+    fgets(numChildTemp, sizeof(numChildTemp), stdin);
+    printf("What would you like your message to be: \n");
+    fgets(tok.input, sizeof(tok.input), stdin);
+    printf("What would you like the destination of the message to be: \n");
+    fgets(destTemp, sizeof(destTemp), stdin);
+    // convert and set
+    tok.dest = atoi(destTemp);
+    numChild = atoi(numChildTemp);
+    
     for(int count = 0; count < 3; count++){
       pipe(fd);
       if ((pid = fork()) < 0) {
