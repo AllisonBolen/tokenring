@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 		int status, pid, bpid, cpid;
     int fd[2];
     char buffer[80];
-    char INP = "COOL"
+    char INP[56] = "COOL";
     printf("Parent pid: %d\n\n", getpid());
       pipe(fd);
       close(fd[0]);
