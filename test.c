@@ -20,11 +20,7 @@ struct token{
 int main(int argc, char* argv[])
 {
 		int status, pid, cpid, child;
-    int fd[2];
-    char buffer[80];
-    char numChildTemp[256];
-    int numChild = 0;
-    char destTemp[256];
+  
     printf("Parent pid: %d\n\n", getpid());
 
       if ((pid = fork()) < 0) {
