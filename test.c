@@ -19,7 +19,7 @@ struct token{
 
 int main(int argc, char* argv[])
 {
-		int status, pid, cpid, child;
+		int status, pid, 2pid, 3pid;
 
     printf("Parent pid: %d\n\n", getpid());
 
