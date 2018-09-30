@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 
           printf("Child is about to fork\n");
           childpid = fork();
-          prinf("This is the child %d of parent %d\n", getpid(), getppid());
+          printf("This is the child %d of parent %d\n", getpid(), getppid());
       }
       else { // parent
           child = wait(&status);
