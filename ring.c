@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
       sleep(5);
     }
     printf("process");
-    pause();
+    //pause();
     // test commit stuff
 		// pid = fork();
 		// if(pid < 0){
