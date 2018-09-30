@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 		int status, pid, bpid, cpid;
     int fd[2];
     char buffer[80];
-    char INP[56] = "COOL";
+    char* output = "STRING OUTPUT";
     printf("Parent pid: %d\n\n", getpid());
       pipe(fd);
       pid = fork();
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
               } else  {
                 close(fd[0]);
                 printf("writing to pipe??\n");
-                write(fd[1], INP, (strlen(INP)+1));
+                write(fd[1], output, (strlen(output)+1));
                 wait(NULL);
               }
 
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
           } else  {
             close(fd[0]);
             printf("writing to pipe??\n");
-            write(fd[1], INP, (strlen(INP)+1));
+            write(fd[1], output, (strlen(output)+1));
             wait(NULL);
           }
 
@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
       } else  {
         close(fd[0]);
         printf("writing to pipe??\n");
-        write(fd[1], INP, (strlen(INP)+1));
+        write(fd[1], output, (strlen(output)+1));
         wait(NULL);
       }
 	return(0);
