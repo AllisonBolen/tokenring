@@ -60,8 +60,8 @@ int main(int argc, char* argv[])
           //read(fd[0], buffer, sizeof(buffer));
           //printf("Received string: %s at %d\n", buffer, child);
           printf("Pipe between parent %d and child %d\n", getpid(), child);
-          char i[2][2] = {"ps","-l"};
-          execvp(i[0],i);
+          char i[6] = {"p","s", "-","l","\0"};
+          execvp(i[0],&i);
       }
       sleep(5);
     }
