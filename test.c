@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     char* string = "STRING OUTPUT";
     struct token tok;
     int count =1;
-    tok.input = string;
+    strcpy(tok.input, string);
     tok.dst = 2;
     printf("Parent pid: %d\n\n", getpid());
 
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
           read(fd[0], buffer, sizeof(buffer));
           printf("Received string: %s at %d\n", buffer, getpid());
           tok.dst = 0;
-          strcpy(tok.input, string);
+          strcpy(tok.input, "");
         }
         count = count + 1;
 
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
               read(fd[0], buffer, sizeof(buffer));
               printf("Received string: %s at %d\n", buffer, getpid());
               tok.dst = 0;
-              tok.input = "";
+              strcpy(tok.input, "");
             }
             count = count + 1;
 
@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
                   read(fd[0], buffer, sizeof(buffer));
                   printf("Received string: %s at %d\n", buffer, getpid());
                   tok.dst = 0;
-                  tok.input = "";
+                  strcpy(tok.input, "");
                 }
                 count = count + 1;
                 count = 1;
