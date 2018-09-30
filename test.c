@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
           printf("I am child PID %ld\n", (long) getpid());
 
           printf("Child is about to fork\n");
-          childpid = fork();
+          int childpid = fork();
           printf("This is the child %d of parent %d\n", getpid(), getppid());
       }
       else { // parent
