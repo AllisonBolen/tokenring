@@ -23,21 +23,23 @@ int main(int argc, char* argv[])
 
     printf("Parent pid: %d\n\n", getpid());
 
-    if ((pid = fork()) < 0) {
+      if ((pid = fork()) < 0) {
         perror("fork failure");
-      exit(1);
-    }
-    else if (pid == 0) { // child
-      for(int i = 0 ; i < 2; i ++){
-        if((cpid = fork())){ // child
-          printf("This is the child %d of parent %d\n", getpid(), getppid());
-          printf("\n new loop \n");
+        exit(1);
+      }
+      else if (pid == 0) { // child
+        for(int i = 0 ; i < 2; i ++){
+          if((cpid = fork())){
+            printf("This is the child %d of parent %d\n", getpid(), getppid());
+            printf("\n\n");
+            fork();
+          }
         }
       }
-    }
-    child = wait(&status);
-    printf("Parent/root of all process is me: %d. we jsut heard from %d\n", getpid(), child);
-
+      else { // parent
+          child = wait(&status);
+          printf("Parent/r of all process is me: %d. we jsut heard from %d\n", getpid(), child);
+      }
 	return(0);
 }
 
