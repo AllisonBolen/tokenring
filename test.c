@@ -30,17 +30,17 @@ int main(int argc, char* argv[])
           exit(1);
       } else if (pid == 0) { // child
           printf("Child (%d): %d Parent: %d\n", 1, getpid(), getppid());
-          pid = fork();
-          if(pid < 0) {
+          2pid = fork();
+          if(2pid < 0) {
               printf("Error");
               exit(1);
-          } else if (pid == 0) { // child
+          } else if (2pid == 0) { // child
               printf("Child (%d): %d Parent: %d\n", 2 getpid(), getppid());
-              pid = fork();
-              if(pid < 0) {
+              3pid = fork();
+              if(3pid < 0) {
                   printf("Error");
                   exit(1);
-              } else if (pid == 0) { // child
+              } else if (3pid == 0) { // child
                   printf("Child (%d): %d Parent: %d\n", 3, getpid(), getppid());
 
                   exit(0);
