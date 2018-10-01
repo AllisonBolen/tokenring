@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
 
     while(1){
-      printf("What would you like your message to be: \n");
+      printf("At process: %d. What would you like your message to be: \n", getpid());
       fgets(tok.input, sizeof(tok.input), stdin);
       char *pos;
       if ((pos=strchr(tok.input, '\n')) != NULL)
