@@ -50,9 +50,9 @@ int main(int argc, char* argv[])
         printf("\tThat machine doesnt exist!!!");
         exit(0);
       }
+      pipe(fd);
     //--------------------------------------------------------------------------
     for(int i = 1 ; i <= numChild ; i++){
-      pipe(fd);
       cpid = fork();
       if(cpid < 0) {
           printf("Error");
