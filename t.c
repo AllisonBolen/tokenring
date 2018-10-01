@@ -48,9 +48,12 @@ int main(int argc, char* argv[])
       } else if (cpid == 0) { // child
           printf("Child (%d): %d Parent: %d\n", i, getpid(), getppid());
           close(fd[1]);
-          if(tok.dst == i){
-            read(fd[0], buffer, sizeof(buffer));
-            printf("Received string: %s at %d\n", buffer, getpid());
+          struct token tok2;
+          read(fd[0], &tok2, sizeof(token));
+          if(tok2.dst == i){
+
+            //read(fd[0], buffer, sizeof(buffer));
+            printf("Received string: %s at %d\n", tok2.input, getpid());
             tok.dst = 0;
             strcpy(tok.input, "");
           }
@@ -58,7 +61,7 @@ int main(int argc, char* argv[])
       } else  {
         close(fd[0]);
         /* Send "string" through the output side of pipe */
-        write(fd[1], string, (strlen(string)+1));
+        write(fd[1], &tok, sizeof(token));
         wait(NULL);
       }
     }
