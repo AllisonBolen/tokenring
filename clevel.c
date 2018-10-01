@@ -8,15 +8,7 @@
 #include <sys/resource.h>
 #include <unistd.h>
 #include <sys/types.h>
-
-void parse(char* strInput, char** parsedInput);
-
-// token for passing
-struct token{
-  char input[256];
-  int dst;
-};
-
+// This is a c level program
 int main(int argc, char* argv[])
 {
 		int pid, bpid, cpid;
@@ -28,8 +20,7 @@ int main(int argc, char* argv[])
     // user userInput
     printf("What would you like your message to be: \n");
     fgets(string, sizeof(string), stdin);
-    // printf("What would you like the destination of the message to be: \n");
-    printf("Parent pid: %d\n\n", getpid());
+    //printf("Parent pid: %d\n\n", getpid());
 
     pipe(fd);
     pid = fork();
@@ -38,17 +29,7 @@ int main(int argc, char* argv[])
         exit(1);
     } else if (pid == 0) { // child
         printf("Child (%d): %d Parent: %d\n", 1, getpid(), getppid());
-
-
         close(fd[1]);
-        // if(tok.dst == count){
-        //   read(fd[0], buffer, sizeof(buffer));
-        //   printf("Received string: %s at %d\n", buffer, getpid());
-        //   tok.dst = 0;
-        //   strcpy(tok.input, "");
-        // }
-        // count = count + 1;
-
         pipe(fd);
         bpid = fork();
         if(bpid < 0) {
@@ -56,17 +37,7 @@ int main(int argc, char* argv[])
             exit(1);
         } else if (bpid == 0) { // child
             printf("Child (%d): %d Parent: %d\n", 2, getpid(), getppid());
-
-
             close(fd[1]);
-            // if(tok.dst == count){
-            //   read(fd[0], buffer, sizeof(buffer));
-            //   printf("Received string: %s at %d\n", buffer, getpid());
-            //   tok.dst = 0;
-            //   strcpy(tok.input, "");
-            // }
-            // count = count + 1;
-
             pipe(fd);
             cpid = fork();
             if(cpid < 0) {
@@ -78,33 +49,23 @@ int main(int argc, char* argv[])
                 // if(tok.dst == count){
                   read(fd[0], buffer, sizeof(buffer));
                   printf("Received string: %s at %d\n", buffer, getpid());
-                //   tok.dst = 0;
-                //   strcpy(tok.input, "");
-                // }
-                // count = count + 1;
-                // count = 1;
                 exit(0);
             } else  {
               close(fd[0]);
-
               /* Send "string" through the output side of pipe */
               write(fd[1], string, (strlen(string)+1));
               wait(NULL);
             }
-
             exit(0);
         } else  {
           close(fd[0]);
-
           /* Send "string" through the output side of pipe */
           write(fd[1], string, (strlen(string)+1));
           wait(NULL);
         }
-
         exit(0);
     } else  {
       close(fd[0]);
-
       /* Send "string" through the output side of pipe */
       write(fd[1], string, (strlen(string)+1));
       wait(NULL);
