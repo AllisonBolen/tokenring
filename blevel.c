@@ -33,6 +33,9 @@ int main(int argc, char* argv[])
       fgets(numChildTemp, sizeof(numChildTemp), stdin);
       printf("What would you like your message to be: \n");
       fgets(tok.input, sizeof(tok.input), stdin);
+      char *pos;
+      if ((pos=strchr(tok.input, '\n')) != NULL)
+        *pos = '\0';
       printf("What would you like the destination of the message to be: \n");
       fgets(destTemp, sizeof(destTemp), stdin);
       tok.dst = atoi(destTemp);
@@ -58,7 +61,7 @@ int main(int argc, char* argv[])
           read(fd[0], &tok2, sizeof(token));
           if(tok2.dst == i){
             printf("\tReceived string: %s at %d.\n", tok2.input, getpid());
-            tok.dst = 0;
+            tok2.dst = 0;
             strcpy(tok.input, "");
           }
           else if(tok2.dst == 0){
