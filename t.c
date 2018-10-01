@@ -51,8 +51,6 @@ int main(int argc, char* argv[])
           token tok2;
           read(fd[0], &tok2, sizeof(token));
           if(tok2.dst == i){
-
-            //read(fd[0], buffer, sizeof(buffer));
             printf("Received string: %s at %d\n", tok2.input, getpid());
             tok.dst = 0;
             strcpy(tok.input, "");
