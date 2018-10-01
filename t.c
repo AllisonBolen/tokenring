@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     struct token tok;
     int count =1;
     strcpy(tok.input, string);
-    tok.dst = 1;
+    tok.dst = 2;
     printf("Parent pid: %d\n\n", getpid());
     //--------------------------------------------------------------------------
     for(int i = 0 ; i < 2 ; i++){
@@ -55,5 +55,6 @@ int main(int argc, char* argv[])
       }
     }
     //--------------------------------------------------------------------------
-	return(0);
+    printf("\nTHIS IS THE END\n")
+  return(0);
 }
