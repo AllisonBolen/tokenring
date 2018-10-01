@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
     printf("How many machines would you like: \n");
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
 
+
     while(1){
       printf("At process: %d. What would you like your message to be: \n", getpid());
       fgets(tok.input, sizeof(tok.input), stdin);
@@ -69,8 +70,11 @@ int main(int argc, char* argv[])
           }
           else if(tok2.dst == 0){
             printf("\tMessage previously delivered.\n");
-          }else{
+          }else if(tok2.dst != 0){
             printf("\tMessage NOT delivered yet.\n");
+          }
+          if(i == numchild){
+            exit(0);
           }
           // exit(0); //with out this line its linear, with this line its a hub
       } else  {
