@@ -24,27 +24,27 @@ int main(int argc, char* argv[])
     char *pos;
     if ((pos=strchr(string, '\n')) != NULL)
       *pos = '\0';
-    //pipe(fd);
+    pipe(fd);
     pid = fork();
-		pipe(fd);
+
     if(pid < 0) {
         printf("Error");
         exit(1);
     } else if (pid == 0) { // child
         printf("Child (%d): %d Parent: %d\n", 1, getpid(), getppid());
         close(fd[1]);
-        // pipe(fd);
+        pipe(fd);
         bpid = fork();
-				pipe(fd);
+
         if(bpid < 0) {
             printf("Error");
             exit(1);
         } else if (bpid == 0) { // child
             printf("Child (%d): %d Parent: %d\n", 2, getpid(), getppid());
             close(fd[1]);
-            // pipe(fd);
+            pipe(fd);
             cpid = fork();
-						pipe(fd);
+
             if(cpid < 0) {
                 printf("Error");
                 exit(1);
