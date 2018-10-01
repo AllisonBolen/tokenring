@@ -33,11 +33,11 @@ int main(int argc, char* argv[])
       fgets(numChildTemp, sizeof(numChildTemp), stdin);
       printf("What would you like your message to be: \n");
       fgets(tok.input, sizeof(tok.input), stdin);
-      printf("\n\n!!BEGIN!!\n\n");
       char *pos;
       if ((pos=strchr(tok.input, '\n')) != NULL)
         *pos = '\0';
       printf("What would you like the destination of the message to be: \n");
+      printf("\n\n!!BEGIN!!\n\n");
       fgets(destTemp, sizeof(destTemp), stdin);
       tok.dst = atoi(destTemp);
       if(tok.dst == 0){
