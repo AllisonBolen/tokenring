@@ -19,13 +19,16 @@ struct token{
 
 int main(int argc, char* argv[])
 {
-		int status, pid, bpid, cpid;
+		int pid, bpid, cpid;
     int fd[2];
-    char buffer[80];
-    char* string = "STRING OUTPUT";
-    struct token tok;
-    int count =1;
-    strcpy(tok.input, string);
+    char buffer[256];
+    char* string[256]ß;
+
+		// make fork
+    // user userInput
+    printf("What would you like your message to be: \n");
+    fgets(string, sizeof(string), stdin);
+    // printf("What would you like the destination of the message to be: \n");
     tok.dst = 3;
     printf("Parent pid: %d\n\n", getpid());
 
@@ -39,14 +42,13 @@ int main(int argc, char* argv[])
 
 
         close(fd[1]);
-        if(tok.dst == count){
-          printf("Reading from pipe??\n");
-          read(fd[0], buffer, sizeof(buffer));
-          printf("Received string: %s at %d\n", buffer, getpid());
-          tok.dst = 0;
-          strcpy(tok.input, "");
-        }
-        count = count + 1;
+        // if(tok.dst == count){
+        //   read(fd[0], buffer, sizeof(buffer));
+        //   printf("Received string: %s at %d\n", buffer, getpid());
+        //   tok.dst = 0;
+        //   strcpy(tok.input, "");
+        // }
+        // count = count + 1;
 
         pipe(fd);
         bpid = fork();
@@ -58,14 +60,13 @@ int main(int argc, char* argv[])
 
 
             close(fd[1]);
-            if(tok.dst == count){
-              printf("Reading from pipe??\n");
-              read(fd[0], buffer, sizeof(buffer));
-              printf("Received string: %s at %d\n", buffer, getpid());
-              tok.dst = 0;
-              strcpy(tok.input, "");
-            }
-            count = count + 1;
+            // if(tok.dst == count){
+            //   read(fd[0], buffer, sizeof(buffer));
+            //   printf("Received string: %s at %d\n", buffer, getpid());
+            //   tok.dst = 0;
+            //   strcpy(tok.input, "");
+            // }
+            // count = count + 1;
 
             pipe(fd);
             cpid = fork();
@@ -75,13 +76,13 @@ int main(int argc, char* argv[])
             } else if (cpid == 0) { // child
                 printf("Child (%d): %d Parent: %d\n", 3, getpid(), getppid());
                 close(fd[1]);
-                if(tok.dst == count){
+                // if(tok.dst == count){
                   read(fd[0], buffer, sizeof(buffer));
                   printf("Received string: %s at %d\n", buffer, getpid());
-                  tok.dst = 0;
-                  strcpy(tok.input, "");
-                }
-                count = count + 1;
+                //   tok.dst = 0;
+                //   strcpy(tok.input, "");
+                // }
+                // count = count + 1;
                 count = 1;
                 exit(0);
             } else  {
