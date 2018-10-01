@@ -30,22 +30,17 @@ int main(int argc, char* argv[])
     printf("Parent pid: %d\n\n", getpid());
     //--------------------------------------------------------------------------
     for(int i = 0 ; i < 2 ; i++){
-      pid = fork();
       pipe(fd);
-      if(pid < 0) {
+      cpid = fork();
+      if(cpid < 0) {
           printf("Error");
           exit(1);
-      } else if (pid == 0) { // child
-          printf("Child (%d): %d Parent: %d\n", count, getpid(), getppid());
-          // close(fd[1]);
+      } else if (cpid == 0) { // child
+          printf("Child (%d): %d Parent: %d\n", 3, getpid(), getppid());
+          close(fd[1]);
           // if(tok.dst == count){
-          //   read(fd[0], buffer, sizeof(buffer));
-          //   printf("Received string: %s at %d\n", buffer, getpid());
-          //   tok.dst = 0;
-          //   strcpy(tok.input, "");
-          // }
-          // count = count + 1;
-          // count = 1;
+            read(fd[0], buffer, sizeof(buffer));
+            printf("Received string: '%s' at %d\n", buffer, getpid());
           exit(0);
       } else  {
         close(fd[0]);
