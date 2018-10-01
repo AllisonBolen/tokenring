@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 		int pid, bpid, cpid;
     int fd[2];
     char buffer[256];
-    char* string[256]ß;
+    char string[256];
 
 		// make fork
     // user userInput
