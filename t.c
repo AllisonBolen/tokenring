@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     int fd[2];
     char buffer[80];
     //char* string = "STRING OUTPUT";
-    struct token tok;
+    token tok;
     char numChildTemp[256];
     int numChild = 0;
     char destTemp[256];
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
       } else if (cpid == 0) { // child
           printf("Child (%d): %d Parent: %d\n", i, getpid(), getppid());
           close(fd[1]);
-          struct token tok2;
+          token tok2;
           read(fd[0], &tok2, sizeof(token));
           if(tok2.dst == i){
 
