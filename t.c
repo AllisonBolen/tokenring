@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     char numChildTemp[256];
     int numChild = 0;
     char destTemp[256];
-    
+
     printf("How many machines would you like: \n");
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
     printf("What would you like your message to be: \n");
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 
     printf("Parent pid: %d\n\n", getpid());
     //--------------------------------------------------------------------------
-    for(int i = 1 ; i <= 3 ; i++){
+    for(int i = 1 ; i <= numChild ; i++){
       pipe(fd);
       cpid = fork();
       if(cpid < 0) {
