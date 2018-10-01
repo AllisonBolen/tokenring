@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
     printf("\nParent pid: %d\n\n", getpid());
 
-    
+
 
     while(1){
       printf("What would you like your message to be: \n");
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
     }
     //--------------------------------------------------------------------------
   }
-    printf("\n!!END!!\n");
+    printf("\n!!END with process: %d!!\n.", getpid());
   return(0);
 }
 
