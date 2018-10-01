@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     printf("What would you like your message to be: \n");
     fgets(string, sizeof(string), stdin);
     //printf("Parent pid: %d\n\n", getpid());
-    if(!strcmp(string, "")){
+    if(strcmp(string, "")==0){
       strtok(string, "\n");
     }
     pipe(fd);
