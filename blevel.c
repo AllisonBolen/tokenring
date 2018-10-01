@@ -56,6 +56,7 @@ int main(int argc, char* argv[])
           printf("Error");
           exit(1);
       } else if (cpid == 0) { // child
+          bpid = fork();
           printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
           close(fd[1]);
           token tok2;
@@ -70,7 +71,6 @@ int main(int argc, char* argv[])
           }else{
             printf("\tMessage NOT delivered yet.\n");
           }
-          bpid = fork();
           exit(0);
       } else  {
         close(fd[0]);
