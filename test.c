@@ -58,21 +58,21 @@ int main(int argc, char* argv[])
             } else  {
               close(fd[0]);
               /* Send "string" through the output side of pipe */
-              //write(fd[1], string, (strlen(string)+1));
+              write(fd[1], string, (strlen(string)+1));
               wait(NULL);
             }
             exit(0);
         } else  {
           close(fd[0]);
           /* Send "string" through the output side of pipe */
-          //write(fd[1], string, (strlen(string)+1));
+          write(fd[1], string, (strlen(string)+1));
           wait(NULL);
         }
         exit(0);
     } else  {
       close(fd[0]);
       /* Send "string" through the output side of pipe */
-      //write(fd[1], string, (strlen(string)+1));
+      write(fd[1], string, (strlen(string)+1));
       wait(NULL);
     }
 	return(0);
