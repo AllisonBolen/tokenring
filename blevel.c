@@ -81,8 +81,9 @@ int main(int argc, char* argv[])
       }
     }
     //--------------------------------------------------------------------------
-  }
     printf("\n!!END with process: %d!!\n.", getpid());
+  }
+
   return(0);
 }
 
