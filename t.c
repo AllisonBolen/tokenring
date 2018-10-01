@@ -36,8 +36,8 @@ int main(int argc, char* argv[])
       printf("What would you like the destination of the message to be: \n");
       fgets(destTemp, sizeof(destTemp), stdin);
       tok.dst = atoi(destTemp);
-      if(tok.dst ==0){
-
+      if(tok.dst == 0){
+        exit(0);
       }
       numChild = atoi(numChildTemp);
     //--------------------------------------------------------------------------
