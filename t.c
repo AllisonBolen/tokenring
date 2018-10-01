@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
     char buffer[80];
     char* string = "STRING OUTPUT";
     struct token tok;
-    int count =1;
-    strcpy(tok.input, string);
+    printf("What would you like your message to be: \n");
+    fgets(tok.input, sizeof(tok.input), stdin);
     tok.dst = 1;
     printf("Parent pid: %d\n\n", getpid());
     //--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
       } else if (cpid == 0) { // child
           printf("Child (%d): %d Parent: %d\n", i, getpid(), getppid());
           close(fd[1]);
-          if(tok.dst == count){
+          if(tok.dst == i){
             read(fd[0], buffer, sizeof(buffer));
             printf("Received string: %s at %d\n", buffer, getpid());
             tok.dst = 0;
