@@ -33,6 +33,7 @@ int main(int argc, char* argv[])
       fgets(numChildTemp, sizeof(numChildTemp), stdin);
       printf("What would you like your message to be: \n");
       fgets(tok.input, sizeof(tok.input), stdin);
+      printf("\n\n!!BEGIN!!\n\n");
       char *pos;
       if ((pos=strchr(tok.input, '\n')) != NULL)
         *pos = '\0';
@@ -49,7 +50,6 @@ int main(int argc, char* argv[])
       }
     //--------------------------------------------------------------------------
     for(int i = 1 ; i <= numChild ; i++){
-      int bpid;
       pipe(fd);
       cpid = fork();
       if(cpid < 0) {
@@ -70,7 +70,6 @@ int main(int argc, char* argv[])
           }else{
             printf("\tMessage NOT delivered yet.\n");
           }
-          // exit(0);
       } else  {
         close(fd[0]);
         /* Send "string" through the output side of pipe */
@@ -80,7 +79,7 @@ int main(int argc, char* argv[])
     }
     //--------------------------------------------------------------------------
   }
-    printf("\nTHIS IS THE END\n");
+    printf("\n!!END!!\n");
   return(0);
 }
 
