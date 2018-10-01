@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
           // }else{
           //   printf("\tMessage NOT delivered yet.\n");
           // }
-
+          exit(0);
       } else  {
         close(fd[0]);
         /* Send "string" through the output side of pipe */
