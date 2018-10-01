@@ -26,13 +26,11 @@ int main(int argc, char* argv[])
     int numChild = 0;
     char destTemp[256];
     signal(SIGINT, sigintHandler);
+    printf("\nParent pid: %d\n\n", getpid());
     printf("How many machines would you like: \n");
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
-    printf("\nParent pid: %d\n\n", getpid());
 
-
-
-    // while(1){
+    while(1){
       printf("What would you like your message to be: \n");
       fgets(tok.input, sizeof(tok.input), stdin);
       char *pos;
@@ -41,6 +39,7 @@ int main(int argc, char* argv[])
       printf("What would you like the destination of the message to be: \n");
       fgets(destTemp, sizeof(destTemp), stdin);
       printf("\n\n!!BEGIN!!\n\n");
+
       tok.dst = atoi(destTemp);
       if(tok.dst == 0){
         exit(0);
@@ -81,13 +80,15 @@ int main(int argc, char* argv[])
         wait(NULL);
       }
     }
+    printf("\n!!END for loop with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
+  }
     //--------------------------------------------------------------------------
-    printf("\n!!END with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
-
+    printf("\n!!END while loop with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
 
   return(0);
 }
 
 void sigintHandler (int sigNum){
+  printf("\n!!END sigint with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
 	exit(0);
 }
