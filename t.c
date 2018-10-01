@@ -19,10 +19,10 @@ typedef struct {
 
 int main(int argc, char* argv[])
 {
-		int status, pid, bpid, cpid;
+		int cpid;
     int fd[2];
     char buffer[80];
-    char* string = "STRING OUTPUT";
+    //char* string = "STRING OUTPUT";
     struct token tok;
     char numChildTemp[256];
     int numChild = 0;
