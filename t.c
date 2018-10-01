@@ -55,6 +55,6 @@ int main(int argc, char* argv[])
       }
     }
     //--------------------------------------------------------------------------
-    printf("\nTHIS IS THE END\n")
+    printf("\nTHIS IS THE END\n");
   return(0);
 }
