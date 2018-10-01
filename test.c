@@ -26,6 +26,7 @@ int main(int argc, char* argv[])
       *pos = '\0';
 
     pipe(fd);
+    for(int i = 0; i < 3; i++){
     pid = fork();
     if(pid < 0) {
         printf("Error");
@@ -41,5 +42,6 @@ int main(int argc, char* argv[])
       write(fd[1], string, (strlen(string)+1));
       wait(NULL);
     }
+  }
 	return(0);
 }
