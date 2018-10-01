@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 
 
 
-    while(1){
+    // while(1){
       printf("What would you like your message to be: \n");
       fgets(tok.input, sizeof(tok.input), stdin);
       char *pos;
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
     }
     //--------------------------------------------------------------------------
     printf("\n!!END with process: %d!!\n.", getpid());
-  }
+
 
   return(0);
 }
