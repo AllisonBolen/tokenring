@@ -68,11 +68,11 @@ int main(int argc, char* argv[])
             strcpy(tok2.input, "");
             tok = tok2;
           }
-          // else if(tok2.dst == 0){
-          //   printf("\tMessage previously delivered.\n");
-          // }else{
-          //   printf("\tMessage NOT delivered yet.\n");
-          // }
+          else if(tok2.dst == 0){
+            printf("\tMessage previously delivered.\n");
+          }else{
+            printf("\tMessage NOT delivered yet.\n");
+          }
           sleep(5);
       } else  {
         close(fd[0]);
