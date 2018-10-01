@@ -27,15 +27,20 @@ int main(int argc, char* argv[])
 
     pipe(fd);
 
-
     for(int i = 1; i < 3; i++){
       pid = fork();
       if(pid < 0) {
           printf("Error");
           exit(1);
       } else if (pid == 0) { // child
+          close(fd[1]);
+          // if(tok.dst == count){
+          read(fd[0], buffer, sizeof(buffer));
           printf("Child (%d): %d Parent: %d\n", i, getpid(), getppid());
       } else  {
+        close(fd[0]);
+        /* Send "string" through the output side of pipe */
+        write(fd[1], string, (strlen(string)+1));
         wait(NULL);
       }
     }
