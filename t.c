@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-void parse(char* strInput, char** parsedInput);
+void sigintHandler (int sigNum);
 
 // token for passing
 typedef struct {
@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
     char numChildTemp[256];
     int numChild = 0;
     char destTemp[256];
+    signal(SIGINT, sigintHandler);
 
     printf("Parent pid: %d\n\n", getpid());
     while(1){
@@ -35,6 +36,9 @@ int main(int argc, char* argv[])
       printf("What would you like the destination of the message to be: \n");
       fgets(destTemp, sizeof(destTemp), stdin);
       tok.dst = atoi(destTemp);
+      if(tok.dst ==0){
+
+      }
       numChild = atoi(numChildTemp);
     //--------------------------------------------------------------------------
     for(int i = 1 ; i <= numChild ; i++){
@@ -65,4 +69,8 @@ int main(int argc, char* argv[])
   }
     printf("\nTHIS IS THE END\n");
   return(0);
+}
+
+void sigintHandler (int sigNum){
+	exit(0);
 }
