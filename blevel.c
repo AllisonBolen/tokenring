@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
           // exit(0); //with out this line its linear, with this line its a hub
       } else  {
         if(i == numChild){
-          printf("Exit on child: %d", getpid());
+          printf("Exit on child: %d\n", getpid());
           exit(0);
         }
         close(fd[0]);
