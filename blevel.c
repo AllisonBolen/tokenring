@@ -26,11 +26,13 @@ int main(int argc, char* argv[])
     int numChild = 0;
     char destTemp[256];
     signal(SIGINT, sigintHandler);
-
+    printf("How many machines would you like: \n");
+    fgets(numChildTemp, sizeof(numChildTemp), stdin);
     printf("\nParent pid: %d\n\n", getpid());
+
+    
+
     while(1){
-      printf("How many machines would you like: \n");
-      fgets(numChildTemp, sizeof(numChildTemp), stdin);
       printf("What would you like your message to be: \n");
       fgets(tok.input, sizeof(tok.input), stdin);
       char *pos;
@@ -71,7 +73,6 @@ int main(int argc, char* argv[])
           }else{
             printf("\tMessage NOT delivered yet.\n");
           }
-          sleep(2);
       } else  {
         close(fd[0]);
         /* Send "string" through the output side of pipe */
