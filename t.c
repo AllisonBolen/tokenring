@@ -26,21 +26,24 @@ int main(int argc, char* argv[])
     struct token tok;
     int count =1;
     strcpy(tok.input, string);
-    tok.dst = 2;
+    tok.dst = 1;
     printf("Parent pid: %d\n\n", getpid());
     //--------------------------------------------------------------------------
-    for(int i = 0 ; i < 2 ; i++){
+    for(int i = 1 ; i <= 3 ; i++){
       pipe(fd);
       cpid = fork();
       if(cpid < 0) {
           printf("Error");
           exit(1);
       } else if (cpid == 0) { // child
-          printf("Child (%d): %d Parent: %d\n", 3, getpid(), getppid());
+          printf("Child (%d): %d Parent: %d\n", i, getpid(), getppid());
           close(fd[1]);
-          // if(tok.dst == count){
+          if(tok.dst == count){
             read(fd[0], buffer, sizeof(buffer));
-            printf("Received string: '%s' at %d\n", buffer, getpid());
+            printf("Received string: %s at %d\n", buffer, getpid());
+            tok.dst = 0;
+            strcpy(tok.input, "");
+          }
           exit(0);
       } else  {
         close(fd[0]);
