@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
                 close(fd[1]);
                 // if(tok.dst == count){
                   read(fd[0], buffer, sizeof(buffer));
-                  printf("Received string: %s at %d\n", buffer, getpid());
+                  printf("Received string: '%s' at %d\n", buffer, getpid());
                 exit(0);
             } else  {
               close(fd[0]);
