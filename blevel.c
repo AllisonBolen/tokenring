@@ -40,6 +40,10 @@ int main(int argc, char* argv[])
         exit(0);
       }
       numChild = atoi(numChildTemp);
+      if(tok.dst < numChild){
+        printf("\tThat machine doesnt exist!!!");
+        exit(0);
+      }
     //--------------------------------------------------------------------------
     for(int i = 1 ; i <= numChild ; i++){
       pipe(fd);
@@ -48,14 +52,19 @@ int main(int argc, char* argv[])
           printf("Error");
           exit(1);
       } else if (cpid == 0) { // child
-          printf("Child (%d): %d Parent: %d\n", i, getpid(), getppid());
+          printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
           close(fd[1]);
           token tok2;
           read(fd[0], &tok2, sizeof(token));
           if(tok2.dst == i){
-            printf("Received string: %s at %d\n", tok2.input, getpid());
+            printf("\tReceived string: %s at %d.\n", tok2.input, getpid());
             tok.dst = 0;
             strcpy(tok.input, "");
+          }
+          else if(tok2.dst == 0){
+            printf("\tMessage previously delivered.\n")
+          }else{
+            print("\tMessage NOT delivered yet.\n")
           }
           exit(0);
       } else  {
