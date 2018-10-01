@@ -73,6 +73,7 @@ int main(int argc, char* argv[])
           // }else{
           //   printf("\tMessage NOT delivered yet.\n");
           // }
+          sleep(5);
           exit(0);
       } else  {
         close(fd[0]);
