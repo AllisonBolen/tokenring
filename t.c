@@ -37,14 +37,13 @@ int main(int argc, char* argv[])
     } else if (pid == 0) { // child
       printf("Child (%d): %d Parent: %d\n", 1, getpid(), getppid());
 // -----------------------------------------------------------------------------
-      for(int i = 0 ; i < 3; i++){
         cpid = fork();
         pipe(fd);
         if(cpid < 0) {
             printf("Error");
             exit(1);
         } else if (cpid == 0) { // child
-            printf("Child (%d): %d Parent: %d\n", i+1, getpid(), getppid());
+            printf("Child (%d): %d Parent: %d\n", count, getpid(), getppid());
             close(fd[1]);
             if(tok.dst == count){
               read(fd[0], buffer, sizeof(buffer));
@@ -61,7 +60,6 @@ int main(int argc, char* argv[])
           write(fd[1], string, (strlen(string)+1));
           wait(NULL);
         }
-      }
     //--------------------------------------------------------------------------
     } else  {
       close(fd[0]);
