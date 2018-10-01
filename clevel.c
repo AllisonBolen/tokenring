@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
     fgets(string, sizeof(string), stdin);
     //printf("Parent pid: %d\n\n", getpid());
     if(strcmp(string, "")==0){
-      strtok(string, "\n");
+      string = strtok(string, "\n");
     }
     pipe(fd);
     pid = fork();
