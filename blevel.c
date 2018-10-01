@@ -73,7 +73,8 @@ int main(int argc, char* argv[])
           }else if(tok2.dst != 0){
             printf("\tMessage NOT delivered yet.\n");
           }
-          if(i == numChild){
+          if(i == numChild
+            printf("Exit on child: %s", getpid());
             exit(0);
           }
           // exit(0); //with out this line its linear, with this line its a hub
