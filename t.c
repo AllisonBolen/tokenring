@@ -12,10 +12,10 @@
 void parse(char* strInput, char** parsedInput);
 
 // token for passing
-struct token{
+typedef struct {
   char input[256];
   int dst;
-};
+} token;
 
 int main(int argc, char* argv[])
 {
