@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     char destTemp[256];
     signal(SIGINT, sigintHandler);
 
-    printf("Parent pid: %d\n\n", getpid());
+    printf("\nParent pid: %d\n\n", getpid());
     while(1){
       printf("How many machines would you like: \n");
       fgets(numChildTemp, sizeof(numChildTemp), stdin);
@@ -56,7 +56,6 @@ int main(int argc, char* argv[])
           printf("Error");
           exit(1);
       } else if (cpid == 0) { // child
-          bpid = fork();
           printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
           close(fd[1]);
           token tok2;
@@ -71,7 +70,7 @@ int main(int argc, char* argv[])
           }else{
             printf("\tMessage NOT delivered yet.\n");
           }
-          exit(0);
+          // exit(0);
       } else  {
         close(fd[0]);
         /* Send "string" through the output side of pipe */
