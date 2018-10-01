@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     struct token tok;
     int count =1;
     strcpy(tok.input, string);
-    tok.dst = 3;
+    tok.dst = 1;
     printf("Parent pid: %d\n\n", getpid());
 
     pipe(fd);
