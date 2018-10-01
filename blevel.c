@@ -49,6 +49,7 @@ int main(int argc, char* argv[])
       }
     //--------------------------------------------------------------------------
     for(int i = 1 ; i <= numChild ; i++){
+      int bpid;
       pipe(fd);
       cpid = fork();
       if(cpid < 0) {
@@ -69,6 +70,7 @@ int main(int argc, char* argv[])
           }else{
             printf("\tMessage NOT delivered yet.\n");
           }
+          bpid = fork();
           exit(0);
       } else  {
         close(fd[0]);
