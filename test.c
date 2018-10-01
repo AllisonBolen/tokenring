@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     int fd[2];
     char buffer[256];
     char string[256];
-    pipe
+    
 		// make fork
     // user userInput
     printf("What would you like your message to be: \n");
