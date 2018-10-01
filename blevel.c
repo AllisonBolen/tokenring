@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
           else if(tok2.dst == 0){
             printf("\tMessage previously delivered.\n");
           }else{
-            print("\tMessage NOT delivered yet.\n");
+            printf("\tMessage NOT delivered yet.\n");
           }
           exit(0);
       } else  {
