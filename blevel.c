@@ -50,9 +50,9 @@ int main(int argc, char* argv[])
         printf("\tThat machine doesnt exist!!!");
         exit(0);
       }
-      pipe(fd);
     //--------------------------------------------------------------------------
     for(int i = 1 ; i <= numChild ; i++){
+      pipe(fd);
       cpid = fork();
       if(cpid < 0) {
           printf("Error");
@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
           }else{
             printf("\tMessage NOT delivered yet.\n");
           }
-          sleep(5);
+          // exit(0); //with out this line its linear, with this line its a hub
       } else  {
         close(fd[0]);
         /* Send "string" through the output side of pipe */
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
       }
     }
     //--------------------------------------------------------------------------
-    printf("\n!!END with process: %d!!\n.", getpid());
+    printf("\n!!END with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
 
 
   return(0);
