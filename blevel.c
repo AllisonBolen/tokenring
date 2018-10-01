@@ -64,6 +64,7 @@ int main(int argc, char* argv[])
             printf("\tReceived string: %s at %d.\n", tok2.input, getpid());
             tok2.dst = 0;
             strcpy(tok2.input, "");
+            tok = tok2;
           }
           else if(tok2.dst == 0){
             printf("\tMessage previously delivered.\n");
