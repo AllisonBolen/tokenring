@@ -21,14 +21,10 @@ int main(int argc, char* argv[])
 {
 		int cpid;
     int fd[2];
-    char buffer[80];
-    //char* string = "STRING OUTPUT";
     token tok;
     char numChildTemp[256];
     int numChild = 0;
     char destTemp[256];
-
-
 
     printf("Parent pid: %d\n\n", getpid());
     while(1){
