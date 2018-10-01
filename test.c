@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     if ((pos=strchr(string, '\n')) != NULL)
       *pos = '\0';
 
-      pipe(fd);
+    pipe(fd);
 
 
     for(int i = 1; i < 3; i++){
