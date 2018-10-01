@@ -74,8 +74,3 @@ int main(int argc, char* argv[])
     }
 	return(0);
 }
-
-void parse(char * strInput, char** parsedInput)
-{
-	printf("execution\n");
-}
