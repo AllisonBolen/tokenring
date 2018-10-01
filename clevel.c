@@ -24,7 +24,6 @@ int main(int argc, char* argv[])
     char *pos;
     if ((pos=strchr(string, '\n')) != NULL)
       *pos = '\0';
-    }
     pipe(fd);
     pid = fork();
     if(pid < 0) {
