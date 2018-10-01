@@ -56,10 +56,10 @@ int main(int argc, char* argv[])
           printf("Error");
           exit(1);
       } else if (cpid == 0) { // child
-          printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
           close(fd[1]);
           token tok2;
           read(fd[0], &tok2, sizeof(token));
+          printf("Child (%d): %d Parent: %d Message: %s Dst: %d.\n", i, getpid(), getppid(), tok2.input, tok2.dst);
           if(tok2.dst == i){
             printf("\tReceived string: %s at %d.\n", tok2.input, getpid());
             tok2.dst = 0;
