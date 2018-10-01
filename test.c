@@ -24,9 +24,9 @@ int main(int argc, char* argv[])
     char *pos;
     if ((pos=strchr(string, '\n')) != NULL)
       *pos = '\0';
+
     pipe(fd);
     pid = fork();
-
     if(pid < 0) {
         printf("Error");
         exit(1);
@@ -35,7 +35,6 @@ int main(int argc, char* argv[])
         close(fd[1]);
         pipe(fd);
         bpid = fork();
-
         if(bpid < 0) {
             printf("Error");
             exit(1);
@@ -44,7 +43,6 @@ int main(int argc, char* argv[])
             close(fd[1]);
             pipe(fd);
             cpid = fork();
-
             if(cpid < 0) {
                 printf("Error");
                 exit(1);
@@ -54,21 +52,18 @@ int main(int argc, char* argv[])
                 // if(tok.dst == count){
                   read(fd[0], buffer, sizeof(buffer));
                   printf("Received string: '%s' at %d\n", buffer, getpid());
-                exit(0);
             } else  {
               close(fd[0]);
               /* Send "string" through the output side of pipe */
               write(fd[1], string, (strlen(string)+1));
               wait(NULL);
             }
-            exit(0);
         } else  {
           close(fd[0]);
           /* Send "string" through the output side of pipe */
           write(fd[1], string, (strlen(string)+1));
           wait(NULL);
         }
-        exit(0);
     } else  {
       close(fd[0]);
       /* Send "string" through the output side of pipe */
