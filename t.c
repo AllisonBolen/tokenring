@@ -24,9 +24,19 @@ int main(int argc, char* argv[])
     char buffer[80];
     char* string = "STRING OUTPUT";
     struct token tok;
+    char numChildTemp[256];
+    int numChild = 0;
+    char destTemp[256];
+    
+    printf("How many machines would you like: \n");
+    fgets(numChildTemp, sizeof(numChildTemp), stdin);
     printf("What would you like your message to be: \n");
     fgets(tok.input, sizeof(tok.input), stdin);
-    tok.dst = 1;
+    printf("What would you like the destination of the message to be: \n");
+    fgets(destTemp, sizeof(destTemp), stdin);
+    tok.dst = atoi(destTemp);
+    numChild = atoi(numChildTemp);
+
     printf("Parent pid: %d\n\n", getpid());
     //--------------------------------------------------------------------------
     for(int i = 1 ; i <= 3 ; i++){
