@@ -33,8 +33,8 @@ int main(int argc, char* argv[])
     } else if (pid == 0) { // child
         printf("Child (%d): %d Parent: %d\n", 1, getpid(), getppid());
         close(fd[1]);
-        pipe(fd);
-        bpid = fork();
+        read(fd[0], buffer, sizeof(buffer));
+        printf("%s\n", buffer);
     } else  {
       close(fd[0]);
       /* Send "string" through the output side of pipe */
