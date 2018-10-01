@@ -29,7 +29,6 @@ int main(int argc, char* argv[])
     printf("What would you like your message to be: \n");
     fgets(string, sizeof(string), stdin);
     // printf("What would you like the destination of the message to be: \n");
-    tok.dst = 3;
     printf("Parent pid: %d\n\n", getpid());
 
     pipe(fd);
@@ -83,7 +82,7 @@ int main(int argc, char* argv[])
                 //   strcpy(tok.input, "");
                 // }
                 // count = count + 1;
-                count = 1;
+                // count = 1;
                 exit(0);
             } else  {
               close(fd[0]);
