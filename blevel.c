@@ -51,13 +51,14 @@ int main(int argc, char* argv[])
         exit(0);
       }
     //--------------------------------------------------------------------------
+    cpid = 0;
     for(int i = 1 ; i <= numChild ; i++){
       pipe(fd);
-      cpid = fork();
       if(cpid < 0) {
           printf("Error");
           exit(1);
       } else if (cpid == 0) { // child
+          cpid = fork();
           close(fd[1]);
           token tok2;
           read(fd[0], &tok2, sizeof(token));
