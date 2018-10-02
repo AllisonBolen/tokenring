@@ -23,34 +23,18 @@ int main(int argc, char* argv[])
     if ((pos=strchr(string, '\n')) != NULL)
       *pos = '\0';
 
-    // pipe(fd);
-		//
-		// cpid = 1;
-		// for (int i = 1; i <= 3 ; i++) {
-		// 	cpid = fork();
-  	// 	if(cpid){
-		// 		break;
-		// 	}
-		// 	printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
-		// }
-		// wait(NULL);
-		// printf("Ending: %d\n", getpid());
+    pipe(fd);
 
 		cpid = 1;
-    int child_id;
-    for (int i = 1; i <= 3 ; i++) {
-	    if (cpid != 0) {
-	        cpid = fork();
-	        child_id = i;
-	    }else if(cpid){
-	            break;
-	        }
-	    }
-    if (cpid == 0) {
-        printf("Child (%d): %d Parent: %d.\n", child_id, getpid(), getppid());
-        sleep(3);
-  	}
-    printf("Ending: %d\n", getpid());
+		for (int i = 1; i <= 3 ; i++) {
+			cpid = fork();
+  		if(cpid){
+				break;
+			}
+			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
+		}
+		wait(NULL);
+		printf("Ending: %d\n", getpid());
 
 	return(0);
 }
