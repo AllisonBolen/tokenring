@@ -12,7 +12,7 @@
 int main(int argc, char* argv[])
 {
 		int pid, cpid;
-    // int fd[2];
+    int fd[2];
     // char buffer[256];
      char string[256];
 
