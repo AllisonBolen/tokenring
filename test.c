@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
   		if(cpid){
 				break;
 			}
-			printf("Child (%d): %d Parent: %d Message: %s Dst: %d.\n", i, getpid(), getppid(), tok2.input, tok2.dst);
+			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 
 		}
 		wait(NULL);
