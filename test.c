@@ -46,11 +46,10 @@ int main(int argc, char* argv[])
 	            break;
 	        }
 	    }
-	    if (cpid == 0) {
-	        printf("Child (%d): %d Parent: %d.\n", child_id, getpid(), getppid());
-	        sleep(3);
-    	}
-		}
+    if (cpid == 0) {
+        printf("Child (%d): %d Parent: %d.\n", child_id, getpid(), getppid());
+        sleep(3);
+  	}
     printf("Ending: %d\n", getpid());
 
 	return(0);
