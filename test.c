@@ -27,15 +27,14 @@ int main(int argc, char* argv[])
 
 		cpid = 1;
 		for (int i = 1; i <= 3 ; i++) {
-  		if (cpid != 0) {
-    		cpid = fork();
-				printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
-				sleep(3);
-  		}else if(cpid){
+			cpid = fork();
+  		if(cpid){
 				break;
 			}
+			printf("Child (%d): %d Parent: %d Message: %s Dst: %d.\n", i, getpid(), getppid(), tok2.input, tok2.dst);
+
 		}
-		printf("Ending: %d\n", getpid());
+		wait(NULL);
 
 	return(0);
 }
