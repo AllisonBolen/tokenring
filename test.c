@@ -35,6 +35,6 @@ int main(int argc, char* argv[])
 
 		}
 		wait(NULL);
-
+		print("Ending: %d\n", getpid())
 	return(0);
 }
