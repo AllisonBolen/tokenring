@@ -32,10 +32,8 @@ int main(int argc, char* argv[])
   		if (cpid != 0) {
     		cpid = fork();
 				printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
-				sleep(1);
-  		}else{
-				wait(NULL);
-			}
+				sleep(3);
+  		}
 		}
 		printf("Ending: %d\n", getpid());
 
