@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     pipe(fd);
 
 		cpid = 1;
-		for (int i =0; i < 3 ; i++) {
+		for (int i = 1; i <= 3 ; i++) {
   		if (cpid != 0) {
     		cpid = fork();
 				printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
