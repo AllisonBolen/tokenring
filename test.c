@@ -37,10 +37,10 @@ int main(int argc, char* argv[])
 		for (int i = 1; i <= numChild ; i++) {
 			cpid = fork();
   		if(cpid){
-				close(fd[0])
+				close(fd[0]);
 				break;
 			}
-			close(fd[1])
+			close(fd[1]);
 			pidList[i-1]= getpid();
 			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 		}
