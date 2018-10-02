@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 				wait(NULL);
 			}
 		}
-
+		printf("Ending: %d\n", getpid());
 
 	return(0);
 }
