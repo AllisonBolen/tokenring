@@ -16,8 +16,6 @@ int main(int argc, char* argv[])
     char buffer[256];
     char string[256];
 
-		// make fork
-    // user userInput
     printf("What would you like your message to be: \n");
     fgets(string, sizeof(string), stdin);
     printf("Parent pid: %d\n\n", getpid());
@@ -33,7 +31,9 @@ int main(int argc, char* argv[])
     		cpid = fork();
 				printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 				sleep(3);
-  		}
+  		}else if(cpid){
+				break;
+			}
 		}
 		printf("Ending: %d\n", getpid());
 
