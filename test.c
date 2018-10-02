@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 		for (int i =0; i < 3 ; i++) {
   		if (cpid != 0) {
     		cpid = fork();
-				printf("Child (%d): %d Parent: %d Message: %s Dst: %d.\n", i, getpid(), getppid());
+				printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
   		}
 		}
 
