@@ -11,10 +11,10 @@
 // This is a c level program
 int main(int argc, char* argv[])
 {
-		int pid, bpid, cpid;
-    int fd[2];
-    char buffer[256];
-    char string[256];
+		int pid, cpid;
+    // int fd[2];
+    // char buffer[256];
+    // char string[256];
 
     printf("What would you like your message to be: \n");
     fgets(string, sizeof(string), stdin);
@@ -23,18 +23,35 @@ int main(int argc, char* argv[])
     if ((pos=strchr(string, '\n')) != NULL)
       *pos = '\0';
 
-    pipe(fd);
+    // pipe(fd);
+		//
+		// cpid = 1;
+		// for (int i = 1; i <= 3 ; i++) {
+		// 	cpid = fork();
+  	// 	if(cpid){
+		// 		break;
+		// 	}
+		// 	printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
+		// }
+		// wait(NULL);
+		// printf("Ending: %d\n", getpid());
 
 		cpid = 1;
-		for (int i = 1; i <= 3 ; i++) {
-			cpid = fork();
-  		if(cpid){
-				break;
-			}
-			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
-
+    int child_id;
+    for (int i = 1; i <= 3 ; i++) {
+	    if (cpid != 0) {
+	        cpid = fork();
+	        child_id = i;
+	    }else if(cpid){
+	            break;
+	        }
+	    }
+	    if (cpid == 0) {
+	        printf("Child (%d): %d Parent: %d.\n", child_id, getpid(), getppid());
+	        sleep(3);
+    	}
 		}
-		wait(NULL);
-		print("Ending: %d\n", getpid());
+    printf("Ending: %d\n", getpid());
+
 	return(0);
 }
