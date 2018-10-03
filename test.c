@@ -97,9 +97,9 @@ int main(int argc, char* argv[])
 			strcpy(tok.input, "");
 			tok = tok;
 			//check the edge cases where
-			if(tok.dst  == numchild ){
+			if(tok.dst  == numChild ){
 				// wrap around
-				write(pipes[numChild-1][WRITE], &tok, sizeof(token)); // write to tail pipe
+				write(pipes[numChild][WRITE], &tok, sizeof(token)); // write to tail pipe
 			}else{
 			  write(pipes[tok.dst+1][WRITE], &tok, sizeof(token)); // write to next pipe
 		  }
