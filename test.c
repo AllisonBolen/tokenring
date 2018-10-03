@@ -15,7 +15,6 @@ typedef struct {
   int dst;
 } token;
 void sigintHandler (int sigNum);
-
 int main(int argc, char* argv[])
 {
 		int pid;
@@ -33,9 +32,11 @@ int main(int argc, char* argv[])
 
 		printf("At process: %d. What would you like your message to be: \n", getpid());
 		fgets(tok.input, sizeof(tok.input), stdin);
+
 		char *pos;
 		if ((pos=strchr(tok.input, '\n')) != NULL)
 			*pos = '\0';
+
 		printf("What would you like the destination of the message to be: \n");
 		fgets(destTemp, sizeof(destTemp), stdin);
 		printf("\n\n!!BEGIN!!\n\n");
@@ -49,13 +50,8 @@ int main(int argc, char* argv[])
 			printf("\tThat machine doesnt exist!!!");
 			kill(getpid(), SIGINT);
 		}
-
 		pidList = (int*) malloc(numChild * sizeof(int));
-
     printf("Parent pid: %d\n\n", getpid());
-    char *pos;
-    if ((pos=strchr(string, '\n')) != NULL)
-      *pos = '\0';
 
     pipe(fd);
 
