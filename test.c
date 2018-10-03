@@ -105,8 +105,8 @@ int main(int argc, char* argv[])
 				// possibly dup2 the read on this and make it stdin also and ask for another input
 				// while also the root parent has a dup2 to standard in that would connect
 				// the root parent process to the tail child
-				read(pipes[numChild-2], &tok, sizeof(token)); // read of the previous pipe
-				write(pipes[numChild-1][WRITE], &tok, sizeof(token)) // write to the next one
+				read(pipes[numChild-2][READ], &tok, sizeof(token)); // read of the previous pipe
+				write(pipes[numChild-1][WRITE], &tok, sizeof(token)); // write to the next one
 			} else{
 				//read(pipes[?][READ], &tok, sizeof(token));
 				printf("\tSeen: %s at %d.\n", tok.input, getpid());
