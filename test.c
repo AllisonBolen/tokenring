@@ -51,6 +51,7 @@ int main(int argc, char* argv[])
 			kill(getpid(), SIGINT);
 		}
 		pidList = (int*) malloc(numChild * sizeof(int));
+		pidList[0]=getpid();
     printf("Parent pid: %d\n\n", getpid());
 
     pipe(fd);
@@ -65,7 +66,7 @@ int main(int argc, char* argv[])
 			}
 			//child
 			close(fd[1]);
-			pidList[i-1]= getpid();
+			pidList[i]= getpid();
 			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[0]);
 		}
 		if(getpid() == pidList[0]){
