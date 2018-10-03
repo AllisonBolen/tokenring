@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
 			kill(getpid(), SIGINT);
 		}
 		// ------------ Pipes
-		int pipes[100][2];
+		int pipes[60][2];
 		for(int i = 0 ; i < numChild ; i++){
 			memcpy(pipes[i], &fd, sizeof(fd));
 		}
@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 		}
 
-		// //communtication process // also in the parent of another process
+		//communtication process all processes have this code
 		// if(getpid() == pidList[0]){
 		// 	read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
 		// 	write(pipes[0][WRITE], &tok, sizeof(token)); // write to next pipe
@@ -104,10 +104,10 @@ int main(int argc, char* argv[])
 
 		//// gotta line up my lists
 		//wait(NULL);
-		while(1){
+		//while(1){
 			printf("Ending: %d\n", getpid());
 			sleep(5);
-		}
+		//}
 
 
 	return(0);
