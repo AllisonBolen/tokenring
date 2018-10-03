@@ -111,20 +111,17 @@ int main(int argc, char* argv[])
 				//read(pipes[?][READ], &tok, sizeof(token));
 				printf("\tSeen: %s at %d.\n", tok.input, getpid());
 				//write(pipes[?][WRITE], &tok, sizeof(token));
+				return 0;
 			}
-
 			//// gotta line up my lists
-
 			//while(1){
-
 			sleep(5);
 		}
-
-
 	return(0);
 }
 
 void sigintHandler (int sigNum){
   printf("\n!!END sigint with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
+	free(pidList);
 	exit(0);
 }
