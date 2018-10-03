@@ -81,6 +81,7 @@ int main(int argc, char* argv[])
 		for(int j = 0; j < sizeof(pidList); j++) {
         printf("%d ", pidList[j]);
     }
+		printf("\n");
 		//communtication process all processes have this code
 		// if(getpid() == pidList[0]){
 		// 	read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
