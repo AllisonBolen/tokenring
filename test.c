@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 			//child
 			close(fd[1]);
 			pidList[i-1]= getpid();
-			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[i-1]);
+			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[0]);
 		}
 		// if(getpid == ){
 		//
