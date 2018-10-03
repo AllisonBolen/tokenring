@@ -88,3 +88,8 @@ int main(int argc, char* argv[])
 
 	return(0);
 }
+
+void sigintHandler (int sigNum){
+  printf("\n!!END sigint with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
+	exit(0);
+}
