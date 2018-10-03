@@ -47,10 +47,11 @@ int main(int argc, char* argv[])
 			pidList[i-1]= getpid();
 			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[i-1]);
 		}
+
+		wait(NULL);
 		write(fd[1], string, sizeof(string));
 		read(fd[0], buffer, sizeof(buffer));
 		printf("Received string: '%s' at %d\n", buffer, getpid());
-		wait(NULL);
 		printf("Ending: %d\n", getpid());
 		sleep(5);
 
