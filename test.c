@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 			}
 			//child
 			pidList[i]= getpid();
-			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid());
+			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 		}
 
 		// //communtication process // also in the parent of another process
