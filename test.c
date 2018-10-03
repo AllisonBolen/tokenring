@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
 		} else{
 			read(fd[0], &tok, sizeof(token));
 			printf("\tSeen: %s at %d.\n", tok.input, getpid());
-			write(fd[1], &tok, sizeof(token));
+			//write(fd[1], &tok, sizeof(token));
 		}
 		wait(NULL);
 		printf("Ending: %d\n", getpid());
