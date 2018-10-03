@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 
 		// fork process for n children
 		pid = 1;
-		for (int i = 0; i < numChild ; i++) {
+		for (int i = 0; i < numChild-1 ; i++) {
 			pid = fork();
   		if(pid){
 				// parent
