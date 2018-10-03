@@ -46,6 +46,8 @@ int main(int argc, char* argv[])
 
 
 		numChild = atoi(numChildTemp);
+		tok.dst = atoi(destTemp);
+		
 		printf("Numchild: %d, tokdest: %d", numChild, tok.dst);
 		if(tok.dst > numChild){
 			printf("\tThat machine doesnt exist!!!");
