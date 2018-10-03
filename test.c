@@ -74,10 +74,13 @@ int main(int argc, char* argv[])
 				break;
 			}
 			//child
-			pidList[i]= getpid();
+			pidList[i+1]= getpid();
 			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 		}
 		wait(NULL);
+		for(int j = 0; j < sizeof(pidList); j++) {
+        printf("%d ", pidList[j]);
+    }
 		//communtication process all processes have this code
 		// if(getpid() == pidList[0]){
 		// 	read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
