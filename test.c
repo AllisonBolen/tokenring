@@ -39,11 +39,11 @@ int main(int argc, char* argv[])
 			pid = fork();
   		if(pid){
 				// parent
-				close(fd[1]);
+				close(fd[0]);
 				break;
 			}
 			//child
-			close(fd[0]);
+			close(fd[1]);
 			pidList[i-1]= getpid();
 			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[i-1]);
 		}
