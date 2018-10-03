@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
     char destTemp[256];
     signal(SIGINT, sigintHandler);
 
-    printf("\nParent pid: %d\n\n", getpid());
+    printf("\nRoot Parent pid: %d\n\n", getpid());
 		// ----------- User input and parsing
     printf("How many machines would you like: \n");
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 
 		// fork process for n children
 		pid = 1;
-		for (int i = 1; i <= numChild ; i++) {
+		for (int i = 0; i < numChild ; i++) {
 			pid = fork();
   		if(pid){
 				// parent
