@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 		}
 		wait(NULL);
-		for(int j = 0; j < sizeof(pidList); j++) {
+		for(int j = 0; j < numChild; j++) {
         printf("%d ", pidList[j]);
     }
 		printf("\n");
