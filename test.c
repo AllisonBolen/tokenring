@@ -15,6 +15,10 @@ typedef struct {
   int dst;
 } token;
 void sigintHandler (int sigNum);
+
+#define WRITE 1
+#define READ 0
+
 int main(int argc, char* argv[])
 {
 		int pid;
@@ -27,6 +31,7 @@ int main(int argc, char* argv[])
     signal(SIGINT, sigintHandler);
 
     printf("\nParent pid: %d\n\n", getpid());
+		// ----------- User input and parsing
     printf("How many machines would you like: \n");
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
 
@@ -50,41 +55,48 @@ int main(int argc, char* argv[])
 			printf("\tThat machine doesnt exist!!!");
 			kill(getpid(), SIGINT);
 		}
+		// ------------ Pipes
+		int pipes[100][2];
+		for(int i = 0 ; i < numChild ; i++){
+			pipes[i]=pipe(fd);
+		}
+
+		// ------------ Process List
 		pidList = (int*) malloc(numChild * sizeof(int));
 		pidList[0]=getpid();
-    printf("Parent pid: %d\n\n", getpid());
 
-    pipe(fd);
-
+		// fork process for n children
 		pid = 1;
 		for (int i = 1; i <= numChild ; i++) {
 			pid = fork();
   		if(pid){
 				// parent
-				close(fd[0]);
 				break;
 			}
 			//child
-			close(fd[1]);
 			pidList[i]= getpid();
 			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[0]);
 		}
-		if(getpid() == pidList[0]){
-			write(fd[1], &tok, sizeof(token));
-		} else if( getpid() == pidList[tok.dst]) { // we are the destination process
-			read(fd[0], &tok, sizeof(token));
-			printf("\tReceived string: %s at %d.\n", tok.input, getpid());
-			tok.dst = 0;
-			strcpy(tok.input, "");
-			tok = tok;
-			write(fd[1], &tok, sizeof(token));
-		} else if (getpid() == pidList[numChild]){ // tail of the list
-			printf("\tAt the tail of the list");
-		} else{
-			read(fd[0], &tok, sizeof(token));
-			printf("\tSeen: %s at %d.\n", tok.input, getpid());
-			//write(fd[1], &tok, sizeof(token));
-		}
+		// communtication process // also in the parent of another process
+		// if(getpid() == pidList[0]){
+		// 	write(fd[1], &tok, sizeof(token));
+		// } else if( getpid() == pidList[tok.dst]) { // we are the destination process
+		// 	read(fd[0], &tok, sizeof(token));
+		// 	printf("\tReceived string: %s at %d.\n", tok.input, getpid());
+		// 	tok.dst = 0;
+		// 	strcpy(tok.input, "");
+		// 	tok = tok;
+		// 	write(fd[1], &tok, sizeof(token));
+		// } else if (getpid() == pidList[numChild]){ // tail of the list
+		// 	printf("\tAt the tail of the list\n");
+		// 	// possibly dup2 the read on this and make it stdin also and ask for another input
+		// 	// while also the root parent has a dup2 to standard in that would connect
+		// 	// the root parent process to the tail child
+		// } else{
+		// 	read(fd[0], &tok, sizeof(token));
+		// 	printf("\tSeen: %s at %d.\n", tok.input, getpid());
+		// 	//write(fd[1], &tok, sizeof(token));
+		// }
 		wait(NULL);
 		printf("Ending: %d\n", getpid());
 		sleep(5);
