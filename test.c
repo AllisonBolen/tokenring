@@ -35,6 +35,17 @@ int main(int argc, char* argv[])
     printf("How many machines would you like: \n");
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
 
+		printf("At process: %d. What would you like your message to be: \n", getpid());
+		fgets(tok.input, sizeof(tok.input), stdin);
+
+		char *pos;
+		if ((pos=strchr(tok.input, '\n')) != NULL)
+			*pos = '\0';
+
+		printf("What would you like the destination of the message to be: \n");
+		fgets(destTemp, sizeof(destTemp), stdin);
+
+
 		numChild = atoi(numChildTemp);
 		if(tok.dst > numChild){
 			printf("\tThat machine doesnt exist!!!");
@@ -69,59 +80,45 @@ int main(int argc, char* argv[])
 		// printf("\n");
 
 		// communtication process all processes have this code
-
-		if(getpid() == pidList[0]){ // root parent
-			// ?? read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
-			printf("At process: %d. What would you like your message to be: \n", getpid());
-			fgets(tok.input, sizeof(tok.input), stdin);
-
-			char *pos;
-			if ((pos=strchr(tok.input, '\n')) != NULL)
-				*pos = '\0';
-
-			printf("What would you like the destination of the message to be: \n");
-			fgets(destTemp, sizeof(destTemp), stdin);
-			//printf("\n\n!!BEGIN!!\n\n");
-
-			tok.dst = atoi(destTemp);
-			if(tok.dst == 0){
-				exit(0);
+		while(1){
+			if(getpid() == pidList[0]){ // root parent
+				// ?? read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
+				tok.dst = atoi(destTemp);
+				if(tok.dst == 0){
+					exit(0);
+				}
+				// write our message
+				if(tok.dst == 0){
+					read(pipes[numChild-1][READ], &tok, sizeof(token));
+				}
+				write(pipes[0][WRITE], &tok, sizeof(token)); // write to next pipe
 			}
-			write(pipes[0][WRITE], &tok, sizeof(token)); // write to next pipe
+			if( getpid() == pidList[tok.dst]) { // we are the destination process
+				read(pipes[tok.dst-1][READ], &tok, sizeof(token)); // read from previous pipe
+				printf("\tDESTINATION Received string: %s at %d.\n", tok.input, getpid());
+				tok.dst = 0;
+				strcpy(tok.input, "");
+				tok = tok;
+				write(pipes[tok.dst][WRITE], &tok, sizeof(token)); // write to next pipe
+			} else if (getpid() == pidList[numChild-1]){ // tail of the list
+				printf("\tAt the tail of the list\n");
+				// possibly dup2 the read on this and make it stdin also and ask for another input
+				// while also the root parent has a dup2 to standard in that would connect
+				// the root parent process to the tail child
+				read(pipes[numChild-2], &tok, sizeof(token)); // read of the previous pipe
+				write(pipes[numChild-1][WRITE], &tok, sizeof(token)) // write to the next one
+			} else{
+				//read(pipes[?][READ], &tok, sizeof(token));
+				printf("\tSeen: %s at %d.\n", tok.input, getpid());
+				//write(pipes[?][WRITE], &tok, sizeof(token));
+			}
 
-		}
-		if( getpid() == pidList[tok.dst]) { // we are the destination process
-			read(pipes[tok.dst][READ], &tok, sizeof(token)); // read from previous pipe
-			printf("\tReceived string: %s at %d.\n", tok.input, getpid());
-			tok.dst = 0;
-			strcpy(tok.input, "");
-			tok = tok;
-			//check the edge cases where
-			if(tok.dst  == numChild ){
-				// wrap around
-				write(pipes[numChild-1][WRITE], &tok, sizeof(token)); // write to tail pipe
-			}else{
-			  write(pipes[tok.dst+1][WRITE], &tok, sizeof(token)); // write to next pipe
-		  }
-		} else if (getpid() == pidList[numChild-1]){ // tail of the list
-			printf("\tAt the tail of the list\n");
-			// possibly dup2 the read on this and make it stdin also and ask for another input
-			// while also the root parent has a dup2 to standard in that would connect
-			// the root parent process to the tail child
-			// read(pipes[numChild-1], &tok, sizeof(token));
-			// write(pipes[0][WRITE], &tok, sizeof(token))
-		} else{
-			read(pipes[numChild-1][READ], &tok, sizeof(token));
-			printf("\tSeen: %s at %d.\n", tok.input, getpid());
-			//write(fd[1], &tok, sizeof(token));
-		}
+			//// gotta line up my lists
 
-		//// gotta line up my lists
+			//while(1){
 
-		//while(1){
-			printf("Ending: %d\n", getpid());
 			sleep(5);
-		//}
+		}
 
 
 	return(0);
