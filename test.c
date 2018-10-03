@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 		// ------------ Pipes
 		int pipes[60][2];
 		for(int i = 0 ; i < numChild ; i++){
-			pipe(pipes[i])
+			pipe(pipes[i]);
 		}
 
 		// ------------ Process List
