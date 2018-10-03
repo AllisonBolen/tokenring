@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 			pidList[i]= getpid();
 			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 		}
-
+		wait(NULL);
 		//communtication process all processes have this code
 		// if(getpid() == pidList[0]){
 		// 	read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
 		// }
 
 		//// gotta line up my lists
-		//wait(NULL);
+
 		//while(1){
 			printf("Ending: %d\n", getpid());
 			sleep(5);
