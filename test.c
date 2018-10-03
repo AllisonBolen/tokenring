@@ -47,6 +47,9 @@ int main(int argc, char* argv[])
 			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[i-1]);
 		}
 		write(fd[1], string, sizeof(string));
+		read(fd[0], buffer, sizeof(buffer));
+		printf("Received string: '%s' at %d\n", buffer, getpid());
+		read(fd[0],)
 		wait(NULL);
 		printf("Ending: %d\n", getpid());
 		sleep(5);
