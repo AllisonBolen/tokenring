@@ -14,6 +14,8 @@ typedef struct {
   char input[256];
   int dst;
 } token;
+void sigintHandler (int sigNum);
+
 int main(int argc, char* argv[])
 {
 		int pid;
