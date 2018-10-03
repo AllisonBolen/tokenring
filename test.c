@@ -11,7 +11,7 @@
 // This is a c level program
 int main(int argc, char* argv[])
 {
-		int pid, cpid;
+		int pid;
     int fd[2];
     // char buffer[256];
     char string[256];
@@ -33,10 +33,10 @@ int main(int argc, char* argv[])
 
     pipe(fd);
 
-		cpid = 1;
+		pid = 1;
 		for (int i = 1; i <= numChild ; i++) {
-			cpid = fork();
-  		if(cpid){
+			pid = fork();
+  		if(pid){
 				// parent
 				close(fd[1]);
 				break;
@@ -49,7 +49,6 @@ int main(int argc, char* argv[])
 		write(fd[1], string, sizeof(string));
 		read(fd[0], buffer, sizeof(buffer));
 		printf("Received string: '%s' at %d\n", buffer, getpid());
-		read(fd[0],)
 		wait(NULL);
 		printf("Ending: %d\n", getpid());
 		sleep(5);
