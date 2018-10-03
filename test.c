@@ -77,10 +77,12 @@ int main(int argc, char* argv[])
 			tok.dst = 0;
 			strcpy(tok.input, "");
 			tok = tok;
+			write(fd[1], &tok, sizeof(token));
 		} else if (getpid() == pidList[numChild]){ // tail of the list
-			printf("At the tail of the list");
+			printf("\tAt the tail of the list");
 		} else{
 			read(fd[0], &tok, sizeof(token));
+			printf("\tSeen: %s at %d.\n", tok.input, getpid());
 			write(fd[1], &tok, sizeof(token));
 		}
 		wait(NULL);
