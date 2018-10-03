@@ -75,31 +75,40 @@ int main(int argc, char* argv[])
 			}
 			//child
 			pidList[i]= getpid();
-			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[0]);
+			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid());
 		}
-		// communtication process // also in the parent of another process
+
+		// //communtication process // also in the parent of another process
 		// if(getpid() == pidList[0]){
-		// 	write(fd[1], &tok, sizeof(token));
+		// 	read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
+		// 	write(pipes[0][WRITE], &tok, sizeof(token)); // write to next pipe
 		// } else if( getpid() == pidList[tok.dst]) { // we are the destination process
-		// 	read(fd[0], &tok, sizeof(token));
+		// 	read(pipes[tok.dst][READ], &tok, sizeof(token)); // read from previous pipe
 		// 	printf("\tReceived string: %s at %d.\n", tok.input, getpid());
 		// 	tok.dst = 0;
 		// 	strcpy(tok.input, "");
 		// 	tok = tok;
-		// 	write(fd[1], &tok, sizeof(token));
+		// 	write(pipes[tok.dst+1][WRITE], &tok, sizeof(token)); // write to next pipe
 		// } else if (getpid() == pidList[numChild]){ // tail of the list
 		// 	printf("\tAt the tail of the list\n");
 		// 	// possibly dup2 the read on this and make it stdin also and ask for another input
 		// 	// while also the root parent has a dup2 to standard in that would connect
 		// 	// the root parent process to the tail child
+		// 	read(pipes[numChild-1], &tok, sizeof(token));
+		// 	write(pipes[0][WRITE], &tok, sizeof(token))
 		// } else{
-		// 	read(fd[0], &tok, sizeof(token));
+		// 	read(pipes[numChild-1], &tok, sizeof(token));
 		// 	printf("\tSeen: %s at %d.\n", tok.input, getpid());
 		// 	//write(fd[1], &tok, sizeof(token));
 		// }
-		wait(NULL);
-		printf("Ending: %d\n", getpid());
-		sleep(5);
+
+		//// gotta line up my lists
+		//wait(NULL);
+		while(1){
+			printf("Ending: %d\n", getpid());
+			sleep(5);
+		}
+
 
 	return(0);
 }
