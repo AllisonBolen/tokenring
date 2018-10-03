@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
 		int pid;
     int fd[2];
     // char buffer[256];
+		char buffer[256];
     char string[256];
 		char numChildTemp[234];
 
