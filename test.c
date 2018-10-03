@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 // This is a c level program
+int *pidList;
 int main(int argc, char* argv[])
 {
 		int pid;
@@ -24,9 +25,8 @@ int main(int argc, char* argv[])
 		printf("What would you like your message to be: \n");
     fgets(string, sizeof(string), stdin);
 
-		int *pidList = (int*) malloc(numChild * sizeof(int));
-
-
+		pidList = (int*) malloc(numChild * sizeof(int));
+		
     printf("Parent pid: %d\n\n", getpid());
     char *pos;
     if ((pos=strchr(string, '\n')) != NULL)
@@ -47,11 +47,10 @@ int main(int argc, char* argv[])
 			pidList[i-1]= getpid();
 			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[i-1]);
 		}
+		if(getpid == ){
 
+		}
 		wait(NULL);
-		write(fd[1], string, sizeof(string));
-		read(fd[0], buffer, sizeof(buffer));
-		printf("Received string: '%s' at %d\n", buffer, getpid());
 		printf("Ending: %d\n", getpid());
 		sleep(5);
 
