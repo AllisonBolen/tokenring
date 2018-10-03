@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
 		// ------------ Pipes
 		int pipes[100][2];
 		for(int i = 0 ; i < numChild ; i++){
-			pipes[i]=pipe(fd);
+			memcpy(pipes[i], pipe(fd); sizeof(fd));
 		}
 
 		// ------------ Process List
