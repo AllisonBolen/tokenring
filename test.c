@@ -22,7 +22,6 @@ void sigintHandler (int sigNum);
 int main(int argc, char* argv[])
 {
 		int pid;
-    int fd[2];
     // char buffer[256];
 		token tok;
     char numChildTemp[256];
@@ -54,7 +53,7 @@ int main(int argc, char* argv[])
 		// ------------ Pipes
 		int pipes[60][2];
 		for(int i = 0 ; i < numChild ; i++){
-			memcpy(pipes[i], &fd, sizeof(fd));
+			pipe(pipes[i])
 		}
 
 		// ------------ Process List
