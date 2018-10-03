@@ -80,6 +80,7 @@ int main(int argc, char* argv[])
 		// printf("\n");
 
 		// communtication process all processes have this code
+		int count = 0;
 		while(1){
 			if(getpid() == pidList[0]){ // root parent
 				// ?? read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
@@ -93,7 +94,7 @@ int main(int argc, char* argv[])
 				}
 				write(pipes[0][WRITE], &tok, sizeof(token)); // write to next pipe
 			}
-			if( getpid() == pidList[tok.dst]) { // we are the destination process
+			if( getpid() == pidList[tok.dst-1]) { // we are the destination process
 				read(pipes[tok.dst-1][READ], &tok, sizeof(token)); // read from previous pipe
 				printf("\tDESTINATION Received string: %s at %d.\n", tok.input, getpid());
 				tok.dst = 0;
@@ -111,7 +112,7 @@ int main(int argc, char* argv[])
 				//read(pipes[?][READ], &tok, sizeof(token));
 				printf("\tSeen: %s at %d.\n", tok.input, getpid());
 				//write(pipes[?][WRITE], &tok, sizeof(token));
-				return 0;
+
 			}
 			//// gotta line up my lists
 			//while(1){
