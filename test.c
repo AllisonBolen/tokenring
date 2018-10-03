@@ -38,14 +38,15 @@ int main(int argc, char* argv[])
 			cpid = fork();
   		if(cpid){
 				// parent
-				close(fd[0]);
+				close(fd[1]);
 				break;
 			}
 			//child
-			close(fd[1]);
+			close(fd[0]);
 			pidList[i-1]= getpid();
 			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[i-1]);
 		}
+		write(fd[1], string, sizeof(string));
 		wait(NULL);
 		printf("Ending: %d\n", getpid());
 		sleep(5);
