@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     fgets(string, sizeof(string), stdin);
 
 		pidList = (int*) malloc(numChild * sizeof(int));
-		
+
     printf("Parent pid: %d\n\n", getpid());
     char *pos;
     if ((pos=strchr(string, '\n')) != NULL)
@@ -47,9 +47,9 @@ int main(int argc, char* argv[])
 			pidList[i-1]= getpid();
 			printf("Child (%d): %d Parent: %d List at 0: %d.\n", i, getpid(), getppid(), pidList[i-1]);
 		}
-		if(getpid == ){
-
-		}
+		// if(getpid == ){
+		//
+		// }
 		wait(NULL);
 		printf("Ending: %d\n", getpid());
 		sleep(5);
