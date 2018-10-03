@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
 			//check the edge cases where
 			if(tok.dst  == numChild ){
 				// wrap around
-				write(pipes[numChild][WRITE], &tok, sizeof(token)); // write to tail pipe
+				write(pipes[numChild-1][WRITE], &tok, sizeof(token)); // write to tail pipe
 			}else{
 			  write(pipes[tok.dst+1][WRITE], &tok, sizeof(token)); // write to next pipe
 		  }
@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
 			// read(pipes[numChild-1], &tok, sizeof(token));
 			// write(pipes[0][WRITE], &tok, sizeof(token))
 		} else{
-			read(pipes[numChild-1], &tok, sizeof(token));
+			read(pipes[numChild-1][READ], &tok, sizeof(token));
 			printf("\tSeen: %s at %d.\n", tok.input, getpid());
 			//write(fd[1], &tok, sizeof(token));
 		}
