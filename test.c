@@ -72,25 +72,21 @@ int main(int argc, char* argv[])
 		wait(NULL);
 
 		// communtication process all processes have this code
-		int count = 0;
-		printf("At process: %d. What would you like your message to be: \n", getpid());
-		fgets(tok.input, sizeof(tok.input), stdin);
 
-		char *pos;
-		if ((pos=strchr(tok.input, '\n')) != NULL)
-			*pos = '\0';
-
-		printf("What would you like the destination of the message to be: \n");
-		fgets(destTemp, sizeof(destTemp), stdin);
-
-		tok.dst = atoi(destTemp);
-
-		if(tok.dst > numChild){
-			printf("\tThat machine doesnt exist!!!");
-			kill(getpid(), SIGINT);
-		}
 		//while(1){
 			if(pid == 1){ // root parent
+				printf("What would you like your message to be: \n", getpid());
+				fgets(tok.input, sizeof(tok.input), stdin);
+				char *pos;
+				if ((pos=strchr(tok.input, '\n')) != NULL)
+					*pos = '\0';
+				printf("What would you like the destination of the message to be: \n");
+				fgets(destTemp, sizeof(destTemp), stdin);
+				tok.dst = atoi(destTemp);
+				if(tok.dst > numChild){
+					printf("\tThat machine doesnt exist!!!");
+					kill(getpid(), SIGINT);
+				}
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 			}else{ // children
 				printf("Child: %d Parent: %d READ: %d WRITE: %d Token DST: %d Token Message: '%s'.\n", getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE, tok.dst, tok.input);
