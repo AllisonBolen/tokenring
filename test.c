@@ -41,15 +41,6 @@ int main(int argc, char* argv[])
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
 		numChild = atoi(numChildTemp);
 
-		printf("What would you like your message to be: \n");
-		fgets(tok.input, sizeof(tok.input), stdin);
-		char *pos;
-		if ((pos=strchr(tok.input, '\n')) != NULL)
-			*pos = '\0';
-		printf("What would you like the destination of the message to be: \n");
-		fgets(destTemp, sizeof(destTemp), stdin);
-		tok.dst = atoi(destTemp);
-
 		// ------------ Pipes
 		int pipes[60][2];
 		for(int i = 0 ; i < numChild ; i++){
@@ -81,10 +72,17 @@ int main(int argc, char* argv[])
 		wait(NULL);
 
 		// communtication process all processes have this code
-		//while(1){
+		while(1){
 			if(pid){ // root parent
 				// ask for user input at the parent process
-
+				printf("What would you like your message to be: \n");
+				fgets(tok.input, sizeof(tok.input), stdin);
+				char *pos;
+				if ((pos=strchr(tok.input, '\n')) != NULL)
+					*pos = '\0';
+				printf("What would you like the destination of the message to be: \n");
+				fgets(destTemp, sizeof(destTemp), stdin);
+				tok.dst = atoi(destTemp);
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 			}else{ // children
 				printf("Child: %d Parent: %d READ: %d WRITE: %d Token DST: %d Token Message: '%s'.\n", getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE, tok.dst, tok.input);
@@ -96,6 +94,7 @@ int main(int argc, char* argv[])
 				}
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 			}
+		}
 	return(0);
 }
 
