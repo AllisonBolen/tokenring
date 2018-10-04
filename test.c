@@ -69,12 +69,13 @@ int main(int argc, char* argv[])
 			break;
 			}
 		}
+
 		wait(NULL);
 
 		// communtication process all processes have this code
-
 		//while(1){
-			if(pid == 1){ // root parent
+			if(pid){ // root parent
+				// ask for user input at the parent process
 				printf("What would you like your message to be: \n");
 				fgets(tok.input, sizeof(tok.input), stdin);
 				char *pos;
@@ -99,7 +100,6 @@ int main(int argc, char* argv[])
 					write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 				}
 			}
-			sleep(5);
 	return(0);
 }
 
