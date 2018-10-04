@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 			break;
 			}
 		}
-
+		sleep(5);
 		wait(NULL);
 
 		// communtication process all processes have this code
@@ -84,7 +84,7 @@ int main(int argc, char* argv[])
 				fgets(destTemp, sizeof(destTemp), stdin);
 				tok.dst = atoi(destTemp);
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
-			}else{ // children
+			} // children
 				printf("Child: %d Parent: %d READ: %d WRITE: %d Token DST: %d Token Message: '%s'.\n", getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE, tok.dst, tok.input);
 				printf("Reading from pipe: %d, on process: %d, token DST: %d\n",myPipes.FD_READ, getpid(), tok.dst);
 				read(myPipes.FD_READ, &tok, sizeof(token));
@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
 				}
 				printf("Writing from pipe: %d, on process: %d, token DST: %d\n", myPipes.FD_WRITE, getpid(), tok.dst);
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
-			}
+			
 			printf("Testing\n");
 		}
 	return(0);
