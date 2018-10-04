@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 
 		//while(1){
 			if(pid == 1){ // root parent
-				printf("What would you like your message to be: \n", getpid());
+				printf("What would you like your message to be: \n");
 				fgets(tok.input, sizeof(tok.input), stdin);
 				char *pos;
 				if ((pos=strchr(tok.input, '\n')) != NULL)
