@@ -18,7 +18,7 @@ typedef struct {
 } token;
 typedef struct{
 	int FD_READ;
-	int FD_WRITE:
+	int FD_WRITE;
 } myPipeDscp;
 void sigintHandler (int sigNum);
 
