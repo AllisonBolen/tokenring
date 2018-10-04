@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 			if(pid == 1){ // root parent
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 			}else{ // children
-				printf("Child: %d Parent: %d READ: %d WRITE: %d Token DST: %d Token Message: '%s'.\n", i, getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE, tok.dst, tok.input);
+				printf("Child: %d Parent: %d READ: %d WRITE: %d Token DST: %d Token Message: '%s'.\n", getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE, tok.dst, tok.input);
 				read(myPipes.FD_READ, &tok, sizeof(token));
 				if( getpid() == tok.dst) { // we are the destination process
 					printf("\tDESTINATION Received string: %s at %d.\n", tok.input, getpid());
