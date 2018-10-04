@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 				;
 			}else {
 			//child
-			myPipes.FD_WRITE = pipes[i+1][WRITE];
+			myPipes.FD_WRITE = pipes[i][WRITE];
 			myPipes.FD_READ = pipes[i-1][READ];
 			pidList[i]= getpid();
 			printf("Child (%d): %d Parent: %d READ: %d WRITE: %d.\n", i, getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE);
