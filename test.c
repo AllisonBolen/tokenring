@@ -86,14 +86,17 @@ int main(int argc, char* argv[])
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 			}else{ // children
 				printf("Child: %d Parent: %d READ: %d WRITE: %d Token DST: %d Token Message: '%s'.\n", getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE, tok.dst, tok.input);
+				printf("Reading from pipe: %d, on process: %d, token DST: %d\n",myPipes.FD_READ, getpid(), tok.dst);
 				read(myPipes.FD_READ, &tok, sizeof(token));
 				if( getpid() == tok.dst) { // we are the destination process
 					printf("\tDESTINATION Received string: %s at %d.\n", tok.input, getpid());
 					tok.dst = 0;
 					strcpy(tok.input, "");
 				}
+				printf("Writing from pipe: %d, on process: %d, token DST: %d\n", myPipes.FD_WRITE, getpid(), tok.dst);
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 			}
+			printf("Testing\n");
 		}
 	return(0);
 }
