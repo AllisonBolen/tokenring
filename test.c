@@ -12,6 +12,7 @@
 int *pidList;
 int pipes[60][2];
 int numChild = 0;
+
 typedef struct {
   char input[256];
   int dst;
@@ -124,7 +125,7 @@ int main(int argc, char* argv[])
 			//// gotta line up my lists
 			//while(1){
 			sleep(5);
-		}
+		//}
 	return(0);
 }
 
