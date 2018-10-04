@@ -72,6 +72,7 @@ int main(int argc, char* argv[])
 		myPipeDscp myPipes;
 		myPipes.FD_WRITE = pipes[0][WRITE];
 		myPipes.FD_READ = pipes[numChild-1][READ];
+		printf("Child (%d): %d Parent: %d READ: %d WRITE: %d.\n", 0, getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE);
 		for (int i = 1; i <= numChild ; i++) {
   		if((pid = fork())){// parent
 				;
