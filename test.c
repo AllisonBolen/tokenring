@@ -54,7 +54,6 @@ int main(int argc, char* argv[])
 		numChild = atoi(numChildTemp);
 		tok.dst = atoi(destTemp);
 
-		printf("Numchild: %d, tokdest: %d", numChild, tok.dst);
 		if(tok.dst > numChild){
 			printf("\tThat machine doesnt exist!!!");
 			kill(getpid(), SIGINT);
@@ -81,7 +80,7 @@ int main(int argc, char* argv[])
 			myPipes.FD_WRITE = pipes[i+1][WRITE];
 			myPipes.FD_READ = pipes[i-1][READ];
 			pidList[i]= getpid();
-			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
+			printf("Child (%d): %d Parent: %d READ: %d WRITE: %d.\n", i, getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE);
 			break;
 			}
 		}
