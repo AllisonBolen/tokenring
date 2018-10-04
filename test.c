@@ -89,43 +89,21 @@ int main(int argc, char* argv[])
 
 		// communtication process all processes have this code
 		int count = 0;
-		// while(1){
-		// 	if(getpid() == pidList[0]){ // root parent
-		// 		// ?? read(pipes[numChild][READ], &tok, sizeof(token) ); // read from tail pipe
-		// 		tok.dst = atoi(destTemp);
-		// 		if(tok.dst == 0){
-		// 			exit(0);
-		// 		}
-		// 		// write our message
-		// 		if(tok.dst == 0){
-		// 			read(pipes[numChild-1][READ], &tok, sizeof(token));
-		// 		}
-		// 		write(pipes[0][WRITE], &tok, sizeof(token)); // write to next pipe
-		// 	}
-		// 	if( getpid() == pidList[tok.dst-1]) { // we are the destination process
-		// 		read(pipes[tok.dst-1][READ], &tok, sizeof(token)); // read from previous pipe
-		// 		printf("\tDESTINATION Received string: %s at %d.\n", tok.input, getpid());
-		// 		tok.dst = 0;
-		// 		strcpy(tok.input, "");
-		// 		tok = tok;
-		// 		write(pipes[tok.dst][WRITE], &tok, sizeof(token)); // write to next pipe
-		// 	} else if (getpid() == pidList[numChild-1]){ // tail of the list
-		// 		printf("\tAt the tail of the list\n");
-		// 		// possibly dup2 the read on this and make it stdin also and ask for another input
-		// 		// while also the root parent has a dup2 to standard in that would connect
-		// 		// the root parent process to the tail child
-		// 		read(pipes[numChild-2][READ], &tok, sizeof(token)); // read of the previous pipe
-		// 		write(pipes[numChild-1][WRITE], &tok, sizeof(token)); // write to the next one
-		// 	} else{
-		// 		//read(pipes[?][READ], &tok, sizeof(token));
-		// 		printf("\tSeen: %s at %d.\n", tok.input, getpid());
-		// 		//write(pipes[?][WRITE], &tok, sizeof(token));
-		//
-		// 	}
-			//// gotta line up my lists
-			//while(1){
+		//while(1){
+			if(pid == 1){ // root parent
+				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
+			}else{ // children
+				printf("Child: %d Parent: %d READ: %d WRITE: %d Token DST: %d Token Message: '%s'.\n", i, getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE, tok.dst, tok.input);
+				read(myPipes.FD_READ, &tok, sizeof(token));
+				if( getpid() == tok.dst) { // we are the destination process
+					printf("\tDESTINATION Received string: %s at %d.\n", tok.input, getpid());
+					tok.dst = 0;
+					strcpy(tok.input, "");
+					tok = tok;
+					write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
+				}
+			}
 			sleep(5);
-		//}
 	return(0);
 }
 
