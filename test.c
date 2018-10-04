@@ -49,10 +49,6 @@ int main(int argc, char* argv[])
 		printf("What would you like the destination of the message to be: \n");
 		fgets(destTemp, sizeof(destTemp), stdin);
 		tok.dst = atoi(destTemp);
-		if(tok.dst > numChild){
-			printf("\tThat machine doesnt exist!!!");
-			kill(getpid(), SIGINT);
-		}
 
 		// ------------ Pipes
 		int pipes[60][2];
