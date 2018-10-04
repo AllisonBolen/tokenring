@@ -70,15 +70,15 @@ int main(int argc, char* argv[])
 
 		// fork process for n children
 		myPipeDscp myPipes;
-		myPipes->FD_WRITE = pipes[0][WRITE];
-		myPipes->FD_READ = pipes[numChild-1][READ];
+		myPipes.FD_WRITE = pipes[0][WRITE];
+		myPipes.FD_READ = pipes[numChild-1][READ];
 		for (int i = 1; i <= numChild ; i++) {
   		if((pid = fork())){// parent
 				;
 			}else {
 			//child
-			myPipes->FD_WRITE = pipes[i+1][WRITE];
-			myPipes->FD_READ = pipes[i-1][READ];
+			myPipes.FD_WRITE = pipes[i+1][WRITE];
+			myPipes.FD_READ = pipes[i-1][READ];
 			pidList[i]= getpid();
 			printf("Child (%d): %d Parent: %d.\n", i, getpid(), getppid());
 			break;
