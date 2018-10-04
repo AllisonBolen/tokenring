@@ -26,13 +26,14 @@ int main(int argc, char* argv[])
     int numChild = 0;
     char destTemp[256];
     signal(SIGINT, sigintHandler);
-    printf("\nParent pid: %d\n\n", getpid());
     printf("How many machines would you like: \n");
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
+    printf("\nParent pid: %d\n\n", getpid());
 
 
-    while(1){
-      printf("At process: %d. What would you like your message to be: \n", getpid());
+
+    // while(1){
+      printf("What would you like your message to be: \n");
       fgets(tok.input, sizeof(tok.input), stdin);
       char *pos;
       if ((pos=strchr(tok.input, '\n')) != NULL)
@@ -40,7 +41,6 @@ int main(int argc, char* argv[])
       printf("What would you like the destination of the message to be: \n");
       fgets(destTemp, sizeof(destTemp), stdin);
       printf("\n\n!!BEGIN!!\n\n");
-
       tok.dst = atoi(destTemp);
       if(tok.dst == 0){
         exit(0);
@@ -51,14 +51,13 @@ int main(int argc, char* argv[])
         exit(0);
       }
     //--------------------------------------------------------------------------
-    cpid = 0;
     for(int i = 1 ; i <= numChild ; i++){
       pipe(fd);
+      cpid = fork();
       if(cpid < 0) {
           printf("Error");
           exit(1);
       } else if (cpid == 0) { // child
-          cpid = fork();
           close(fd[1]);
           token tok2;
           read(fd[0], &tok2, sizeof(token));
@@ -69,32 +68,26 @@ int main(int argc, char* argv[])
             strcpy(tok2.input, "");
             tok = tok2;
           }
-          else if(tok2.dst == 0){
-            printf("\tMessage previously delivered.\n");
-          }else if(tok2.dst != 0){
-            printf("\tMessage NOT delivered yet.\n");
-          }
-          if(i == numChild){
-            printf("Exit on child: %d", getpid());
-            exit(0);
-          }
-          // exit(0); //with out this line its linear, with this line its a hub
-      } else {
+          // else if(tok2.dst == 0){
+          //   printf("\tMessage previously delivered.\n");
+          // }else{
+          //   printf("\tMessage NOT delivered yet.\n");
+          // }
+          sleep(5);
+      } else  {
         close(fd[0]);
         /* Send "string" through the output side of pipe */
         write(fd[1], &tok, sizeof(token));
         wait(NULL);
       }
     }
-    printf("\n!!END for loop with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
-  }
     //--------------------------------------------------------------------------
-    printf("\n!!END while loop with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
+    printf("\n!!END with process: %d!!\n.", getpid());
+
 
   return(0);
 }
 
 void sigintHandler (int sigNum){
-  printf("\n!!END sigint with process: %d, who has a parent of: %d!!\n.", getpid(), getppid());
 	exit(0);
 }
