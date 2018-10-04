@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
 		// ----------- User input and parsing
     printf("How many machines would you like: \n");
     fgets(numChildTemp, sizeof(numChildTemp), stdin);
+		numChild = atoi(numChildTemp);
 
 
 		// ------------ Pipes
@@ -82,8 +83,6 @@ int main(int argc, char* argv[])
 		printf("What would you like the destination of the message to be: \n");
 		fgets(destTemp, sizeof(destTemp), stdin);
 
-
-		numChild = atoi(numChildTemp);
 		tok.dst = atoi(destTemp);
 
 		if(tok.dst > numChild){
