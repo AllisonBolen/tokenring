@@ -51,28 +51,27 @@ int main(int argc, char* argv[])
 		pidList = (int*) malloc(numChild * sizeof(int));
 		pidList[0]=getpid();
 
-		// fork process for n children
+		// ------ fork process for n children
 		myPipeDscp myPipes;
 		myPipes.FD_WRITE = pipes[0][WRITE];
 		myPipes.FD_READ = pipes[numChild-1][READ];
 		printf("Child (%d): %d Parent: %d READ: %d WRITE: %d.\n", 0, getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE);
 		for (int i = 1; i < numChild ; i++) {
   		if((pid = fork())){// parent
-				;
-			}else {
-			//child
-			myPipes.FD_WRITE = pipes[i][WRITE];
-			myPipes.FD_READ = pipes[i-1][READ];
-			pidList[i]= getpid();
-			printf("Child (%d): %d Parent: %d READ: %d WRITE: %d.\n", i, getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE);
-			break;
+				; // just keep spawing children
+			}else {//child
+				// install the pipes for each child via a struck
+			  myPipes.FD_WRITE = pipes[i][WRITE];
+			  myPipes.FD_READ = pipes[i-1][READ];
+			  pidList[i]= getpid();
+			  printf("Child (%d): %d Parent: %d READ: %d WRITE: %d.\n", i, getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE);
+			  break;
 			}
 		}
 		sleep(5);
 		wait(NULL);
 
 		// communtication process all processes have this code
-		while(1){
 			if(pid){ // root parent
 				// ask for user input at the parent process
 				printf("What would you like your message to be: \n");
@@ -83,6 +82,7 @@ int main(int argc, char* argv[])
 				printf("What would you like the destination of the message to be: \n");
 				fgets(destTemp, sizeof(destTemp), stdin);
 				tok.dst = atoi(destTemp);
+				read(myPipes.FD_READ, &tok, sizeof(token));
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 			} // children
 				printf("Child: %d Parent: %d READ: %d WRITE: %d Token DST: %d Token Message: '%s'.\n", getpid(), getppid(), myPipes.FD_READ, myPipes.FD_WRITE, tok.dst, tok.input);
@@ -95,9 +95,8 @@ int main(int argc, char* argv[])
 				}
 				printf("Writing from pipe: %d, on process: %d, token DST: %d\n", myPipes.FD_WRITE, getpid(), tok.dst);
 				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
-			
+
 			printf("Testing\n");
-		}
 	return(0);
 }
 

@@ -9,6 +9,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 // This is a c level program
+// THIS willl pipe a message through 3 children and stop
+//  Allison Bolen
 int main(int argc, char* argv[])
 {
 		int pid, bpid, cpid;
@@ -16,17 +18,16 @@ int main(int argc, char* argv[])
     char buffer[256];
     char string[256];
 
-		// make fork
     // user userInput
     printf("What would you like your message to be: \n");
     fgets(string, sizeof(string), stdin);
-    //printf("Parent pid: %d\n\n", getpid());
     char *pos;
     if ((pos=strchr(string, '\n')) != NULL)
       *pos = '\0';
-    pipe(fd);
-    pid = fork();
 
+		pipe(fd);
+		// fork
+    pid = fork();
     if(pid < 0) {
         printf("Error");
         exit(1);
@@ -42,6 +43,7 @@ int main(int argc, char* argv[])
         } else if (bpid == 0) { // child
             printf("Child (%d): %d Parent: %d\n", 2, getpid(), getppid());
             close(fd[1]);
+						// -------- begnign of repreated section
             pipe(fd);
             cpid = fork();
 
@@ -61,6 +63,7 @@ int main(int argc, char* argv[])
               write(fd[1], string, (strlen(string)+1));
               wait(NULL);
             }
+						// -------- end of repeated section ------
             exit(0);
         } else  {
           close(fd[0]);

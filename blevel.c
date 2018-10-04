@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+// sigint for closing properly.
 void sigintHandler (int sigNum);
 
 // token for passing
@@ -16,7 +17,9 @@ typedef struct {
   char input[256];
   int dst;
 } token;
-
+// This is a B level program
+// THIS will pipe a message through n children and ask for more input.
+//  Allison Bolen
 int main(int argc, char* argv[])
 {
 		int cpid;
@@ -50,7 +53,7 @@ int main(int argc, char* argv[])
         printf("\tThat machine doesnt exist!!!");
         exit(0);
       }
-    //--------------------------------------------------------------------------
+    //---------------------------- begining of repeated section -----------
     for(int i = 1 ; i <= numChild ; i++){
       pipe(fd);
       cpid = fork();
@@ -78,9 +81,10 @@ int main(int argc, char* argv[])
         /* Send "string" through the output side of pipe */
         write(fd[1], &tok, sizeof(token));
         wait(NULL);
+        break;
       }
     }
-    //--------------------------------------------------------------------------
+    //--------------------------------ending of repeated section----------------
     printf("\n!!END with process: %d!!\n.", getpid());
   }
 
