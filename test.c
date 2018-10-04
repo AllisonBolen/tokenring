@@ -16,7 +16,7 @@ typedef struct {
   char input[256];
   int dst;
 } token;
-typdef struct{
+typedef struct{
 	int FD_READ;
 	int FD_WRITE:
 } myPipeDscp;
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 
 		// fork process for n children
 		myPipeDscp myPipes;
-		myPipes->FD_WRITE = pipes[i][WRITE];
+		myPipes->FD_WRITE = pipes[0][WRITE];
 		myPipes->FD_READ = pipes[numChild-1][READ];
 		for (int i = 1; i <= numChild ; i++) {
   		if((pid = fork())){// parent
