@@ -96,9 +96,8 @@ int main(int argc, char* argv[])
 					printf("\tDESTINATION Received string: %s at %d.\n", tok.input, getpid());
 					tok.dst = 0;
 					strcpy(tok.input, "");
-					tok = tok;
-					write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 				}
+				write(myPipes.FD_WRITE, &tok, sizeof(token)); // write to next pipe
 			}
 	return(0);
 }
