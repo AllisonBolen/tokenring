@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 
 
 
-    // while(1){
+    while(1){
       printf("What would you like your message to be: \n");
       fgets(tok.input, sizeof(tok.input), stdin);
       char *pos;
@@ -68,12 +68,11 @@ int main(int argc, char* argv[])
             strcpy(tok2.input, "");
             tok = tok2;
           }
-          // else if(tok2.dst == 0){
-          //   printf("\tMessage previously delivered.\n");
-          // }else{
-          //   printf("\tMessage NOT delivered yet.\n");
-          // }
-          sleep(5);
+          else if(tok2.dst == 0){
+            printf("\tMessage previously delivered.\n");
+          }else{
+            printf("\tMessage NOT delivered yet.\n");
+          }
       } else  {
         close(fd[0]);
         /* Send "string" through the output side of pipe */
@@ -83,7 +82,7 @@ int main(int argc, char* argv[])
     }
     //--------------------------------------------------------------------------
     printf("\n!!END with process: %d!!\n.", getpid());
-
+  }
 
   return(0);
 }
